@@ -1,20 +1,21 @@
 {
-  "version": "0.1.23",
+  "version": "0.1.27",
   "channel": "beta",
-  "url": "https://github.com/178497/sen/releases/download/v0.1.23/Sen-Setup-0.1.23.exe",
-  "sha256": "5a30ff52e9c92df0e4c29916167bbb4a0862b62bd0fbd3bf9abcf1156940d1f6",
+  "url": "https://github.com/178497/sen/releases/download/v0.1.27/Sen-Setup-0.1.27.exe",
+  "sha256": "1b0ecb40960387cd619905976db4e1d19ad12ee4cce48873e1d1a7fc5816e509",
   "size_mb": 15.3,
-  "url_zip": "https://cdn.jsdelivr.net/gh/178497/sen@main/Sen-Setup-0.1.23.zip",
-  "url_zip_pages": "https://178497.github.io/sen/Sen-Setup-0.1.23.zip",
-  "zip_sha256": "30c0affa28338da2bd015187c752f669086646a137c5d8d99ae39628a7796cf1",
-  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.23/Sen-0.1.23-portable.zip",
-  "portable_sha256": "e56052c7237bd1f248a7dd2da98982d33eb25bca11f68a8242537f543eb9a6ae",
+  "url_zip": "https://cdn.jsdelivr.net/gh/178497/sen@main/Sen-Setup-0.1.27.zip",
+  "url_zip_pages": "https://178497.github.io/sen/Sen-Setup-0.1.27.zip",
+  "zip_sha256": "6b26d1ba8eb982913cde59ab96106ab118aee7ac89892598a9f62ab2f053fae5",
+  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.27/Sen-0.1.27-portable.zip",
+  "portable_sha256": "8d06c36dac025c78b93d2edf251481b85fded8bb5bf558cc8be792fad8717147",
   "portable_size_mb": 15.9,
   "min_version": "0.1.0",
-  "notes": "修复训练最后一步失败：select_model.py 现在随包分发；打包时新增脚本完整性检查，缺文件会直接报错而不是装完才失败",
+  "notes": "平台差异抽成独立层，为 macOS 版做准备；macOS 打包脚本与训练脚本（fp16 LoRA / MPS）就绪；Windows 行为不变",
   "highlights": [
-    "修复训练最后一步失败：select_model.py 现在随包分发",
-    "打包时新增脚本完整性检查，缺文件会直接报错而不是装完才失败"
+    "平台差异抽成独立层，为 macOS 版做准备",
+    "macOS 打包脚本与训练脚本（fp16 LoRA / MPS）就绪",
+    "Windows 行为不变"
   ],
   "update_url": "https://178497.github.io/sen/latest.json"
 }
