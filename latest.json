@@ -1,12 +1,15 @@
 {
-  "version": "0.1.1",
+  "version": "0.1.2",
   "channel": "beta",
-  "url": "https://cdn.jsdelivr.net/gh/178497/sen@main/Sen-Setup-0.1.1.exe",
-  "sha256": "1f4d53878f7ba87f6bcd107414abce882d6b78637e7628a30b6ecdec430e11d8",
+  "url": "https://github.com/178497/sen/releases/download/v0.1.2/Sen-Setup-0.1.2.exe",
+  "sha256": "76504b69de7777016a6a741e05901798590be61adc7300a3569e33769c4e1753",
   "size_mb": 14.1,
-  "portable_url": "https://cdn.jsdelivr.net/gh/178497/sen@main/Sen-0.1.1-portable.zip",
-  "portable_sha256": "e41a7e750e37e5b055020c096bc88c0193d7fc5ef3ab052cc8bb400a647e84ee",
+  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.2/Sen-0.1.2-portable.zip",
+  "portable_sha256": "f23788e28acf73c4f2d8113d611a80d77418b4e74aa0c8aff9025b4d1942c4e8",
   "portable_size_mb": 14.5,
   "min_version": "0.1.0",
-  "notes": "更强的更新源容错；修复若干细节。"
+  "notes": "更新包改用 CDN（zip），下载更快",
+  "url_zip": "https://cdn.jsdelivr.net/gh/178497/sen@main/Sen-Setup-0.1.2.zip",
+  "zip_sha256": "b95a43f4aa404c31c589e78a2ddeb5101f084939b14f7cd18963f843a032c15a",
+  "update_url": "https://cdn.jsdelivr.net/gh/178497/sen@main/latest.json"
 }
