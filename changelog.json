@@ -1,5 +1,13 @@
 [
   {
+    "version": "0.1.30",
+    "date": "2026-10-24",
+    "highlights": [
+      "macOS 上用 open -a 启动 Ollama（.app 不能直接 Popen）",
+      "mac 构建脚本增加签名校验、架构提示、PyInstaller 失败定位"
+    ]
+  },
+  {
     "version": "0.1.29",
     "date": "2026-10-24",
     "highlights": [
