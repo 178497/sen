@@ -1,5 +1,14 @@
 [
   {
+    "version": "0.1.35",
+    "date": "2026-10-24",
+    "highlights": [
+      "补上 setup_train.sh 随包分发（此前 mac 上训练环境装不起来）",
+      "打包自检扩展到 .sh 脚本，缺文件会在构建阶段直接报错",
+      "mac 训练依赖改为和 Windows 共用 requirements-train.txt，仅去掉 bitsandbytes"
+    ]
+  },
+  {
     "version": "0.1.33",
     "date": "2026-10-24",
     "highlights": [
