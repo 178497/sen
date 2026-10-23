@@ -1,20 +1,20 @@
 {
-  "version": "0.1.19",
+  "version": "0.1.20",
   "channel": "beta",
-  "url": "https://github.com/178497/sen/releases/download/v0.1.19/Sen-Setup-0.1.19.exe",
-  "sha256": "c945ac11e21ac398dd907339448bef865f873bf34cde6697f415ba24793de436",
+  "url": "https://github.com/178497/sen/releases/download/v0.1.20/Sen-Setup-0.1.20.exe",
+  "sha256": "ed8ffd16aad44a67888d2fc54e041eac3ab7dbf3b8d6b25c530871b9dce3b42a",
   "size_mb": 15.3,
-  "url_zip": "https://cdn.jsdelivr.net/gh/178497/sen@main/Sen-Setup-0.1.19.zip",
-  "url_zip_pages": "https://178497.github.io/sen/Sen-Setup-0.1.19.zip",
-  "zip_sha256": "eb49a8b282ce3fc1b4f31cf46c163d4fa1cdeb3e61f4fb15299bc027062330db",
-  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.19/Sen-0.1.19-portable.zip",
-  "portable_sha256": "5c0fcf269bcec3096e6d69b4e47ca14601dd705449af01d5e2a734c079366ad1",
+  "url_zip": "https://cdn.jsdelivr.net/gh/178497/sen@main/Sen-Setup-0.1.20.zip",
+  "url_zip_pages": "https://178497.github.io/sen/Sen-Setup-0.1.20.zip",
+  "zip_sha256": "23a7b3368d7d96d54866389d8a6a2eca2a8781d747f31fd597742df6c5abbab7",
+  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.20/Sen-0.1.20-portable.zip",
+  "portable_sha256": "553538ec1a6536756b4bba57288e2a665b98e4944b403e2c4a8fff9c1598deea",
   "portable_size_mb": 15.8,
   "min_version": "0.1.0",
-  "notes": "修复安装版训练起不来：train.ps1 现在随包分发；训练脚本改为读取 CHAT_VENV_TRAIN，不再找错环境路径",
+  "notes": "训练向导：说一句需求，森自动推荐 3 种方案；训练时实时显示「预计还需 X 分 X 秒」",
   "highlights": [
-    "修复安装版训练起不来：train.ps1 现在随包分发",
-    "训练脚本改为读取 CHAT_VENV_TRAIN，不再找错环境路径"
+    "训练向导：说一句需求，森自动推荐 3 种方案",
+    "训练时实时显示「预计还需 X 分 X 秒」"
   ],
   "update_url": "https://178497.github.io/sen/latest.json"
 }
