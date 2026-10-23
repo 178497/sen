@@ -1,20 +1,20 @@
 {
-  "version": "0.1.16",
+  "version": "0.1.17",
   "channel": "beta",
-  "url": "https://github.com/178497/sen/releases/download/v0.1.16/Sen-Setup-0.1.16.exe",
-  "sha256": "2fbf9f58a05039766d275887d6cc2dfe352eaea90efcdd98c1f3bfaa28f836b2",
+  "url": "https://github.com/178497/sen/releases/download/v0.1.17/Sen-Setup-0.1.17.exe",
+  "sha256": "c24bd303d9bfede7cdee41b92f6e1bb066f7f7209a5a7bd415bf908227568336",
   "size_mb": 15.3,
-  "url_zip": "https://cdn.jsdelivr.net/gh/178497/sen@main/Sen-Setup-0.1.16.zip",
-  "url_zip_pages": "https://178497.github.io/sen/Sen-Setup-0.1.16.zip",
-  "zip_sha256": "14866721a1960ae18f6ed3a95f43795f8df1b9318c286b708332559bec540c42",
-  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.16/Sen-0.1.16-portable.zip",
-  "portable_sha256": "b2178ad780f0efc3409d58bc2880859cfdd13ec663fb5765b52f35a773a8a76b",
+  "url_zip": "https://cdn.jsdelivr.net/gh/178497/sen@main/Sen-Setup-0.1.17.zip",
+  "url_zip_pages": "https://178497.github.io/sen/Sen-Setup-0.1.17.zip",
+  "zip_sha256": "2ae189ad2f670ab545791327f01b1e0e5d9bb2b08ce83bfa7f8cc07c528db3a8",
+  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.17/Sen-0.1.17-portable.zip",
+  "portable_sha256": "8ffe23974ae1977e10f8142d754bc634e79235a094007f68c4804afc814c11c1",
   "portable_size_mb": 15.8,
   "min_version": "0.1.0",
-  "notes": "预览页提示条跟随所选主题换风格；发布脚本对大文件更稳（不再卡住）",
+  "notes": "首次打开有 5 步新手引导；引导随时可在设置 → 关于里重新观看",
   "highlights": [
-    "预览页提示条跟随所选主题换风格",
-    "发布脚本对大文件更稳（不再卡住）"
+    "首次打开有 5 步新手引导",
+    "引导随时可在设置 → 关于里重新观看"
   ],
   "update_url": "https://178497.github.io/sen/latest.json"
 }
