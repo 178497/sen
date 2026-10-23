@@ -280,7 +280,7 @@
   <div class="actions">
     <a class="btn primary" id="download-setup" href="https://github.com/178497/sen/releases/latest">Windows 安装包 <small id="setup-meta"></small></a>
     <a class="btn" id="download-portable" href="https://github.com/178497/sen/releases/latest">便携版 <small id="portable-meta"></small></a>
-    <a class="btn" id="download-mac" href="https://github.com/178497/sen/releases/latest">macOS 版 <small id="mac-meta">内测</small></a>
+    <a class="btn" id="download-mac" href="#mac-note">macOS 版 <small id="mac-meta">内测</small></a>
     <a class="btn demo" href="https://178497.github.io/sen/demo/?demo=1" target="_blank" rel="noopener">在线体验 ↗</a>
   </div>
   <p class="hintline">安装包 = 开始菜单 + 卸载项 + 自动更新；便携版 = 解压即用。Windows 数据在 <code>%LOCALAPPDATA%\Sen</code>。</p>
@@ -290,6 +290,7 @@
     <p>支持 Apple Silicon（M1 及以上），系统要求 macOS 11+。安装包没有签名和公证，第一次打开需要：右键点 Sen.app → 打开，或在终端执行：</p>
     <code>xattr -dr com.apple.quarantine /Applications/Sen.app</code>
     <p>macOS 上的训练走 fp16 LoRA（不使用 4-bit 量化），速度比 NVIDIA 显卡慢，但功能一致。数据保存在 <code>~/Library/Application Support/Sen</code>。</p>
+    <p><b>当前状态</b>：macOS 安装包由本机构建产出，上传到 Release 后这里会自动变成下载链接。</p>
   </div>
 
   <div class="grid">
