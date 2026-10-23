@@ -1,20 +1,21 @@
 {
-  "version": "0.1.33",
+  "version": "0.1.35",
   "channel": "beta",
-  "url": "https://github.com/178497/sen/releases/download/v0.1.33/Sen-Setup-0.1.33.exe",
-  "sha256": "28437df4aa99c30cdaf1258cd7b83a00a2f4be2213da15bb610a176e2cb6df4f",
+  "url": "https://github.com/178497/sen/releases/download/v0.1.35/Sen-Setup-0.1.35.exe",
+  "sha256": "83d67ff10d748471b687f41f57a7903ba9550b94c0119ed9ced3348e86d37c69",
   "size_mb": 15.3,
-  "url_zip": "https://github.com/178497/sen/releases/download/v0.1.33/Sen-Setup-0.1.33.zip",
-  "url_zip_pages": "https://github.com/178497/sen/releases/download/v0.1.33/Sen-Setup-0.1.33.zip",
-  "zip_sha256": "ebc518c3b7caf2bec0c059ac470eaeadb5ccc2a3375d787fd6fad7935285d590",
-  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.33/Sen-0.1.33-portable.zip",
-  "portable_sha256": "ba59d14693af72186edce5283d418cd37595e81d3fcf498592da382ccb3f53f3",
+  "url_zip": "https://github.com/178497/sen/releases/download/v0.1.35/Sen-Setup-0.1.35.zip",
+  "url_zip_pages": "https://github.com/178497/sen/releases/download/v0.1.35/Sen-Setup-0.1.35.zip",
+  "zip_sha256": "2b4206d5014da95dcae82cd8c6fb0b02d6d6abf59e644c2bd1f69664bcd0f5bc",
+  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.35/Sen-0.1.35-portable.zip",
+  "portable_sha256": "443a7e19d4774cb8c437f100d832df81c12bb090a1184cec0b88da329b1650c1",
   "portable_size_mb": 15.9,
   "min_version": "0.1.0",
-  "notes": "修复训练收尾：打包版此前会把 app 本体当成 Python 解释器去跑 select_model.py；macOS 与 Windows 都改为优先使用训练环境里的解释器",
+  "notes": "补上 setup_train.sh 随包分发（此前 mac 上训练环境装不起来）；打包自检扩展到 .sh 脚本，缺文件会在构建阶段直接报错；mac 训练依赖改为和 Windows 共用 requirements-train.txt，仅去掉 bitsandbytes",
   "highlights": [
-    "修复训练收尾：打包版此前会把 app 本体当成 Python 解释器去跑 select_model.py",
-    "macOS 与 Windows 都改为优先使用训练环境里的解释器"
+    "补上 setup_train.sh 随包分发（此前 mac 上训练环境装不起来）",
+    "打包自检扩展到 .sh 脚本，缺文件会在构建阶段直接报错",
+    "mac 训练依赖改为和 Windows 共用 requirements-train.txt，仅去掉 bitsandbytes"
   ],
   "update_url": "https://178497.github.io/sen/latest.json"
 }
