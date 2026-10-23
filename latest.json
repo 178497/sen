@@ -1,20 +1,20 @@
 {
-  "version": "0.1.22",
+  "version": "0.1.23",
   "channel": "beta",
-  "url": "https://github.com/178497/sen/releases/download/v0.1.22/Sen-Setup-0.1.22.exe",
-  "sha256": "b139bcb4c5eb41ef4b533dbdbb8c7343953f763294c16ad20bf4c924496b1634",
+  "url": "https://github.com/178497/sen/releases/download/v0.1.23/Sen-Setup-0.1.23.exe",
+  "sha256": "5a30ff52e9c92df0e4c29916167bbb4a0862b62bd0fbd3bf9abcf1156940d1f6",
   "size_mb": 15.3,
-  "url_zip": "https://cdn.jsdelivr.net/gh/178497/sen@main/Sen-Setup-0.1.22.zip",
-  "url_zip_pages": "https://178497.github.io/sen/Sen-Setup-0.1.22.zip",
-  "zip_sha256": "d8f55af8ac0e67c6688ee3be77cfd9acafd87de30caf7fd327ea205a34d2cabe",
-  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.22/Sen-0.1.22-portable.zip",
-  "portable_sha256": "f5eed21a33060b8141bd3c61531b20327821091b3a8e8c0d6475470f421e4178",
-  "portable_size_mb": 15.8,
+  "url_zip": "https://cdn.jsdelivr.net/gh/178497/sen@main/Sen-Setup-0.1.23.zip",
+  "url_zip_pages": "https://178497.github.io/sen/Sen-Setup-0.1.23.zip",
+  "zip_sha256": "30c0affa28338da2bd015187c752f669086646a137c5d8d99ae39628a7796cf1",
+  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.23/Sen-0.1.23-portable.zip",
+  "portable_sha256": "e56052c7237bd1f248a7dd2da98982d33eb25bca11f68a8242537f543eb9a6ae",
+  "portable_size_mb": 15.9,
   "min_version": "0.1.0",
-  "notes": "训练舱面板加高到 880px，内容区独立滚动，不再和底部工具栏叠在一起；训练向导可折叠，选完方案自动收起成一行",
+  "notes": "修复训练最后一步失败：select_model.py 现在随包分发；打包时新增脚本完整性检查，缺文件会直接报错而不是装完才失败",
   "highlights": [
-    "训练舱面板加高到 880px，内容区独立滚动，不再和底部工具栏叠在一起",
-    "训练向导可折叠，选完方案自动收起成一行"
+    "修复训练最后一步失败：select_model.py 现在随包分发",
+    "打包时新增脚本完整性检查，缺文件会直接报错而不是装完才失败"
   ],
   "update_url": "https://178497.github.io/sen/latest.json"
 }
