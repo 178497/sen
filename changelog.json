@@ -1,5 +1,13 @@
 [
   {
+    "version": "0.1.36",
+    "date": "2026-10-24",
+    "highlights": [
+      "训练环境安装用到的 requirements-train.txt 现在随包分发（此前新机器装训练环境会失败）",
+      "mac 打包自检改为全盘查找文件名，不再依赖固定的 .app 目录布局"
+    ]
+  },
+  {
     "version": "0.1.35",
     "date": "2026-10-24",
     "highlights": [
