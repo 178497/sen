@@ -1,20 +1,21 @@
 {
-  "version": "0.1.36",
+  "version": "0.1.37",
   "channel": "beta",
-  "url": "https://github.com/178497/sen/releases/download/v0.1.36/Sen-Setup-0.1.36.exe",
-  "sha256": "56a381a486ef7a2a49cdb1e1a12f39fcc7dded26bcc9df7b9c1570f7a5823796",
+  "url": "https://github.com/178497/sen/releases/download/v0.1.37/Sen-Setup-0.1.37.exe",
+  "sha256": "cec7edbd6a87f91d214b6738828aad8b5347af309491461c3098a3bfb8a878c7",
   "size_mb": 15.3,
-  "url_zip": "https://github.com/178497/sen/releases/download/v0.1.36/Sen-Setup-0.1.36.zip",
-  "url_zip_pages": "https://github.com/178497/sen/releases/download/v0.1.36/Sen-Setup-0.1.36.zip",
-  "zip_sha256": "d40419cd1dbdfbedfa799218e0dfdc987fc86cb79b1ceeacc4c627e129cfc513",
-  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.36/Sen-0.1.36-portable.zip",
-  "portable_sha256": "51a522077b2884ec40c934032eb163a3d2a74b8150fdf799d2c811a4b87fae17",
+  "url_zip": "https://github.com/178497/sen/releases/download/v0.1.37/Sen-Setup-0.1.37.zip",
+  "url_zip_pages": "https://github.com/178497/sen/releases/download/v0.1.37/Sen-Setup-0.1.37.zip",
+  "zip_sha256": "6673c5fcc1ce198aeebc1713ef713f92ad7a57315b6e4b5dd5fb033af83f957a",
+  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.37/Sen-0.1.37-portable.zip",
+  "portable_sha256": "f62fa965d2eeab0502a8b5104939d8792041cb4c5f4ad0f29f75378ec907e5bf",
   "portable_size_mb": 15.9,
   "min_version": "0.1.0",
-  "notes": "训练环境安装用到的 requirements-train.txt 现在随包分发（此前新机器装训练环境会失败）；mac 打包自检改为全盘查找文件名，不再依赖固定的 .app 目录布局",
+  "notes": "训练产物不再写进安装目录：脚本只读、日志与模型写到数据目录；macOS 上训练目录为 ~/Library/Application Support/Sen/training，不再污染 .app 包体；Windows 路径保持原样，已有训练结果仍然可见",
   "highlights": [
-    "训练环境安装用到的 requirements-train.txt 现在随包分发（此前新机器装训练环境会失败）",
-    "mac 打包自检改为全盘查找文件名，不再依赖固定的 .app 目录布局"
+    "训练产物不再写进安装目录：脚本只读、日志与模型写到数据目录",
+    "macOS 上训练目录为 ~/Library/Application Support/Sen/training，不再污染 .app 包体",
+    "Windows 路径保持原样，已有训练结果仍然可见"
   ],
   "update_url": "https://178497.github.io/sen/latest.json"
 }
