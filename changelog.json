@@ -1,5 +1,14 @@
 [
   {
+    "version": "0.1.37",
+    "date": "2026-10-24",
+    "highlights": [
+      "训练产物不再写进安装目录：脚本只读、日志与模型写到数据目录",
+      "macOS 上训练目录为 ~/Library/Application Support/Sen/training，不再污染 .app 包体",
+      "Windows 路径保持原样，已有训练结果仍然可见"
+    ]
+  },
+  {
     "version": "0.1.36",
     "date": "2026-10-24",
     "highlights": [
