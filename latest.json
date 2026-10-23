@@ -1,12 +1,12 @@
 {
-  "version": "0.1.0",
+  "version": "0.1.1",
   "channel": "beta",
-  "url": "https://github.com/178497/sen/releases/download/v0.1.0/Sen-Setup-0.1.0.exe",
-  "sha256": "de157c41b7f55c633688c5ed5708fe7a1a98934bc32bbb18e8fb32bb85577844",
+  "url": "https://github.com/178497/sen/releases/download/v0.1.1/Sen-Setup-0.1.1.exe",
+  "sha256": "1f4d53878f7ba87f6bcd107414abce882d6b78637e7628a30b6ecdec430e11d8",
   "size_mb": 14.1,
-  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.0/Sen-0.1.0-portable.zip",
-  "portable_sha256": "937d4c664d0887d9fc7c0b984db20bcd26d7690579a5ba25dbbc89562cae4f54",
+  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.1/Sen-0.1.1-portable.zip",
+  "portable_sha256": "e41a7e750e37e5b055020c096bc88c0193d7fc5ef3ab052cc8bb400a647e84ee",
   "portable_size_mb": 14.5,
   "min_version": "0.1.0",
-  "notes": "更新说明请在这里填写。"
+  "notes": "更强的更新源容错；修复若干细节。"
 }
