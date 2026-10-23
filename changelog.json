@@ -1,5 +1,13 @@
 [
   {
+    "version": "0.1.33",
+    "date": "2026-10-24",
+    "highlights": [
+      "修复训练收尾：打包版此前会把 app 本体当成 Python 解释器去跑 select_model.py",
+      "macOS 与 Windows 都改为优先使用训练环境里的解释器"
+    ]
+  },
+  {
     "version": "0.1.32",
     "date": "2026-10-24",
     "highlights": [
