@@ -1,5 +1,14 @@
 [
   {
+    "version": "0.1.32",
+    "date": "2026-10-24",
+    "highlights": [
+      "macOS 更新改为打开访达后拖拽替换，不再尝试静默安装",
+      "更新下载按平台选择安装包：mac 读 macos_url，不会下到 Windows 的 exe",
+      "新增 release/publish_mac.py：一条命令上传 mac 包并写入清单"
+    ]
+  },
+  {
     "version": "0.1.31",
     "date": "2026-10-24",
     "highlights": [
