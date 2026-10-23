@@ -1,5 +1,13 @@
 [
   {
+    "version": "0.1.19",
+    "date": "2026-10-23",
+    "highlights": [
+      "修复安装版训练起不来：train.ps1 现在随包分发",
+      "训练脚本改为读取 CHAT_VENV_TRAIN，不再找错环境路径"
+    ]
+  },
+  {
     "version": "0.1.17",
     "date": "2026-10-23",
     "highlights": [
