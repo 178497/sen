@@ -111,7 +111,7 @@
 </main>
 
 <script>
-  document.getElementById("setup-meta").textContent = "v0.1.2 · 14.1 MB";
+  document.getElementById("setup-meta").textContent = "v0.1.3 · 14.1 MB";
 
   fetch("latest.json", { cache: "no-store" })
     .then(response => response.ok ? response.json() : null)
@@ -127,7 +127,7 @@
       if (data.portable_size_mb) document.getElementById("portable-meta").textContent = `${data.portable_size_mb} MB`;
     })
     .catch(() => {
-      document.getElementById("version").textContent = "0.1.2";
+      document.getElementById("version").textContent = "0.1.3";
     });
 </script>
 </body>
