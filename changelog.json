@@ -1,5 +1,14 @@
 [
   {
+    "version": "0.1.27",
+    "date": "2026-10-24",
+    "highlights": [
+      "平台差异抽成独立层，为 macOS 版做准备",
+      "macOS 打包脚本与训练脚本（fp16 LoRA / MPS）就绪",
+      "Windows 行为不变"
+    ]
+  },
+  {
     "version": "0.1.23",
     "date": "2026-10-24",
     "highlights": [
