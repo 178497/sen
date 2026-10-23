@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>森 · 本地 AI 助手</title>
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #06090f;
+    --panel: rgba(255,255,255,.045);
+    --line: rgba(140,180,220,.16);
+    --text: #e8f2ff;
+    --muted: #7f93a8;
+    --accent: #4fd1c5;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(60% 50% at 15% 0%, rgba(60,120,255,.22), transparent 60%),
+      radial-gradient(50% 45% at 85% 15%, rgba(255,90,160,.18), transparent 60%),
+      radial-gradient(55% 50% at 70% 100%, rgba(60,230,200,.18), transparent 60%),
+      var(--bg);
+    color: var(--text);
+    font: 15px/1.75 "Microsoft YaHei UI", "PingFang SC", sans-serif;
+    display: grid;
+    place-items: center;
+    padding: 48px 20px;
+  }
+  main { width: min(880px, 100%); }
+  .brand { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
+  .brand img { width: 46px; height: 46px; border-radius: 12px; }
+  .brand h1 { margin: 0; font-size: 30px; letter-spacing: .06em; }
+  .tag { color: var(--muted); font-size: 13px; letter-spacing: .18em; text-transform: uppercase; }
+  p.lead { color: #b9c8d8; margin: 18px 0 26px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 30px; }
+  a.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 22px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform .15s ease, border-color .15s ease, background .15s ease;
+  }
+  a.btn:hover { transform: translateY(-1px); border-color: var(--accent); }
+  a.btn.primary { background: linear-gradient(135deg, #22c1c3, #3b82f6); border-color: transparent; color: #04121a; }
+  a.btn small { font-weight: 400; opacity: .8; }
+  .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .card {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--panel);
+    padding: 16px 18px;
+  }
+  .card h2 { margin: 0 0 8px; font-size: 14px; letter-spacing: .08em; color: var(--accent); }
+  .card p { margin: 0; color: #a9bacb; font-size: 13px; }
+  footer { margin-top: 32px; color: #6f8199; font-size: 12px; line-height: 1.9; }
+  code { background: rgba(255,255,255,.07); padding: 1px 6px; border-radius: 5px; font-size: 12px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="brand">
+    <img src="assistant-256.png" alt="">
+    <div>
+      <div class="tag">SEN / PRIVATE NODE</div>
+      <h1>森</h1>
+    </div>
+  </div>
+
+  <p class="lead">
+    在自己的电脑上运行的 AI 助手。对话、看图、画图、训练模型，全部本地完成，
+    内容不出这台机器。支持接入远程 API，也支持完全离线。
+  </p>
+
+  <div class="actions">
+    <a class="btn primary" id="download-setup" href="#">下载安装包 <small id="setup-meta"></small></a>
+    <a class="btn" id="download-portable" href="#">便携版 <small id="portable-meta"></small></a>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2>需要先装 Ollama</h2>
+      <p>森 通过 Ollama 运行本地模型。安装后首次启动会引导你下载对话模型（约 1.4 GB）。</p>
+    </div>
+    <div class="card">
+      <h2>系统要求</h2>
+      <p>Windows 10/11 64 位，建议 16 GB 内存；有 NVIDIA 显卡会明显更快。</p>
+    </div>
+    <div class="card">
+      <h2>数据位置</h2>
+      <p>对话与资料保存在 <code>%LOCALAPPDATA%\Sen</code>，卸载时会询问是否保留。</p>
+    </div>
+  </div>
+
+  <footer>
+    当前版本：<span id="version">—</span><br>
+    SHA-256：<code id="sha">—</code><br>
+    安装包未签名，首次运行 Windows 可能提示“未知发布者”，
+    点“更多信息 → 仍要运行”即可。
+  </footer>
+</main>
+
+<script>
+  fetch("latest.json", { cache: "no-store" })
+    .then(response => response.ok ? response.json() : null)
+    .then(data => {
+      if (!data) return;
+      document.getElementById("version").textContent = data.version || "—";
+      document.getElementById("sha").textContent = data.sha256 || "—";
+      const setup = document.getElementById("download-setup");
+      const portable = document.getElementById("download-portable");
+      if (data.url) setup.href = data.url;
+      if (data.portable_url) portable.href = data.portable_url;
+      if (data.size_mb) document.getElementById("setup-meta").textContent = `${data.size_mb} MB`;
+      if (data.portable_size_mb) document.getElementById("portable-meta").textContent = `${data.portable_size_mb} MB`;
+    })
+    .catch(() => {});
+</script>
+</body>
+</html>
