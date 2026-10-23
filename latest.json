@@ -1,20 +1,20 @@
 {
-  "version": "0.1.21",
+  "version": "0.1.22",
   "channel": "beta",
-  "url": "https://github.com/178497/sen/releases/download/v0.1.21/Sen-Setup-0.1.21.exe",
-  "sha256": "65a257d9ad2bb24711b3611eab485de9c24d0f9a4d734c88649c845aa3bb6de7",
+  "url": "https://github.com/178497/sen/releases/download/v0.1.22/Sen-Setup-0.1.22.exe",
+  "sha256": "b139bcb4c5eb41ef4b533dbdbb8c7343953f763294c16ad20bf4c924496b1634",
   "size_mb": 15.3,
-  "url_zip": "https://cdn.jsdelivr.net/gh/178497/sen@main/Sen-Setup-0.1.21.zip",
-  "url_zip_pages": "https://178497.github.io/sen/Sen-Setup-0.1.21.zip",
-  "zip_sha256": "019f7b54aa72a7523ac7464ab8740e7d1c44769ceac6d4dcdade2ca99e3853af",
-  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.21/Sen-0.1.21-portable.zip",
-  "portable_sha256": "f00e6bfc3fe9194c6fb0dd8a781b5e73044b1c9369c47b601f08f73d3df778fb",
+  "url_zip": "https://cdn.jsdelivr.net/gh/178497/sen@main/Sen-Setup-0.1.22.zip",
+  "url_zip_pages": "https://178497.github.io/sen/Sen-Setup-0.1.22.zip",
+  "zip_sha256": "d8f55af8ac0e67c6688ee3be77cfd9acafd87de30caf7fd327ea205a34d2cabe",
+  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.22/Sen-0.1.22-portable.zip",
+  "portable_sha256": "f5eed21a33060b8141bd3c61531b20327821091b3a8e8c0d6475470f421e4178",
   "portable_size_mb": 15.8,
   "min_version": "0.1.0",
-  "notes": "训练向导扩展到 12 类学生场景：学科答疑、考试刷题、论文写作、编程作业、英语翻译、写作文案、笔记总结、实验数据、演讲面试、心理树洞、学习规划、通用；选中方案会自动按这个方向去搜寻中文语料",
+  "notes": "训练舱面板加高到 880px，内容区独立滚动，不再和底部工具栏叠在一起；训练向导可折叠，选完方案自动收起成一行",
   "highlights": [
-    "训练向导扩展到 12 类学生场景：学科答疑、考试刷题、论文写作、编程作业、英语翻译、写作文案、笔记总结、实验数据、演讲面试、心理树洞、学习规划、通用",
-    "选中方案会自动按这个方向去搜寻中文语料"
+    "训练舱面板加高到 880px，内容区独立滚动，不再和底部工具栏叠在一起",
+    "训练向导可折叠，选完方案自动收起成一行"
   ],
   "update_url": "https://178497.github.io/sen/latest.json"
 }
