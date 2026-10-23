@@ -1,20 +1,21 @@
 {
-  "version": "0.1.31",
+  "version": "0.1.32",
   "channel": "beta",
-  "url": "https://github.com/178497/sen/releases/download/v0.1.31/Sen-Setup-0.1.31.exe",
-  "sha256": "754c0edac14f060ac31812604933c400610b6ed64eea41d31f68dcc6a66de244",
+  "url": "https://github.com/178497/sen/releases/download/v0.1.32/Sen-Setup-0.1.32.exe",
+  "sha256": "175223970cf1bb0bdda28d85ffb4d34640b3aac5470206d1a418e2ee926f732e",
   "size_mb": 15.3,
-  "url_zip": "https://cdn.jsdelivr.net/gh/178497/sen@main/Sen-Setup-0.1.31.zip",
-  "url_zip_pages": "https://178497.github.io/sen/Sen-Setup-0.1.31.zip",
-  "zip_sha256": "5396683f561144c9ca4b28d18cd6f015d93b294a2bb821796a7ca47c79044095",
-  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.31/Sen-0.1.31-portable.zip",
-  "portable_sha256": "bf6dc2d9d9a0d12a64834c4e60addb88b9a39cc0e16b7c67cd9c10b5af65dac9",
+  "url_zip": "https://cdn.jsdelivr.net/gh/178497/sen@main/Sen-Setup-0.1.32.zip",
+  "url_zip_pages": "https://178497.github.io/sen/Sen-Setup-0.1.32.zip",
+  "zip_sha256": "f434d41bab5324aea00a9debe8056ef2fe3b5e3a9f8248924cc6ec3e0e33bb9e",
+  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.32/Sen-0.1.32-portable.zip",
+  "portable_sha256": "7e248678427024eb468d1aeb9e7124f16a4ce00b4ab5bf06d4cbbc480a6a7396",
   "portable_size_mb": 15.9,
   "min_version": "0.1.0",
-  "notes": "生图支持 Apple MPS（fp16），Mac 上不再退回 CPU；新增 doctor-mac.command：构建前自检 python3 / CLT / 磁盘 / PyPI / Ollama",
+  "notes": "macOS 更新改为打开访达后拖拽替换，不再尝试静默安装；更新下载按平台选择安装包：mac 读 macos_url，不会下到 Windows 的 exe；新增 release/publish_mac.py：一条命令上传 mac 包并写入清单",
   "highlights": [
-    "生图支持 Apple MPS（fp16），Mac 上不再退回 CPU",
-    "新增 doctor-mac.command：构建前自检 python3 / CLT / 磁盘 / PyPI / Ollama"
+    "macOS 更新改为打开访达后拖拽替换，不再尝试静默安装",
+    "更新下载按平台选择安装包：mac 读 macos_url，不会下到 Windows 的 exe",
+    "新增 release/publish_mac.py：一条命令上传 mac 包并写入清单"
   ],
   "update_url": "https://178497.github.io/sen/latest.json"
 }
