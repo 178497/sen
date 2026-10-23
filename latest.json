@@ -1,16 +1,21 @@
 {
-  "version": "0.1.13",
+  "version": "0.1.14",
   "channel": "beta",
-  "url": "https://github.com/178497/sen/releases/download/v0.1.13/Sen-Setup-0.1.13.exe",
-  "sha256": "8e1fcafcdbb84b8944b7e1d6d81c25a48d438e37f623382e9652db08ed16302b",
+  "url": "https://github.com/178497/sen/releases/download/v0.1.14/Sen-Setup-0.1.14.exe",
+  "sha256": "426fc32176dfaffe99963da174508d9cc18c992e0e5ca2ffc66e5b7b81f3837c",
   "size_mb": 15.3,
-  "url_zip": "https://cdn.jsdelivr.net/gh/178497/sen@main/Sen-Setup-0.1.13.zip",
-  "url_zip_pages": "https://178497.github.io/sen/Sen-Setup-0.1.13.zip",
-  "zip_sha256": "0fa81fe81fa67e3b55055cb2c9217b81b8ade3773915d0a03e1ca24e5826dc2f",
-  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.13/Sen-0.1.13-portable.zip",
-  "portable_sha256": "6362517e8e16017e224e0c08dfa9c8f9bae30a5905857ab07609be4a0d7e5a66",
+  "url_zip": "https://cdn.jsdelivr.net/gh/178497/sen@main/Sen-Setup-0.1.14.zip",
+  "url_zip_pages": "https://178497.github.io/sen/Sen-Setup-0.1.14.zip",
+  "zip_sha256": "8d6a6c07dd118e72fdc6798f7e775a80b480f3c6ea30d0990d5671939f7403d6",
+  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.14/Sen-0.1.14-portable.zip",
+  "portable_sha256": "5a0288cef78d451e0eebcb61126c89ad55f423ae398de76f39b575c997233074",
   "portable_size_mb": 15.8,
   "min_version": "0.1.0",
-  "notes": "糖果主题：爱心气泡、圆润图标、小猫空状态、专属音乐与启动动画",
+  "notes": "下载页新增「在线体验」：不安装也能试全部主题与动效；网站新增更新日志，每个版本改了什么一目了然；更新提示里直接列出新版本的改动",
+  "highlights": [
+    "下载页新增「在线体验」：不安装也能试全部主题与动效",
+    "网站新增更新日志，每个版本改了什么一目了然",
+    "更新提示里直接列出新版本的改动"
+  ],
   "update_url": "https://178497.github.io/sen/latest.json"
 }
