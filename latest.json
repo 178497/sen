@@ -1,20 +1,20 @@
 {
-  "version": "0.1.30",
+  "version": "0.1.31",
   "channel": "beta",
-  "url": "https://github.com/178497/sen/releases/download/v0.1.30/Sen-Setup-0.1.30.exe",
-  "sha256": "2136ede897e658a00e4ae6c54373df97b0adf9e96797a8e47d4a9294be396780",
+  "url": "https://github.com/178497/sen/releases/download/v0.1.31/Sen-Setup-0.1.31.exe",
+  "sha256": "754c0edac14f060ac31812604933c400610b6ed64eea41d31f68dcc6a66de244",
   "size_mb": 15.3,
-  "url_zip": "https://cdn.jsdelivr.net/gh/178497/sen@main/Sen-Setup-0.1.30.zip",
-  "url_zip_pages": "https://178497.github.io/sen/Sen-Setup-0.1.30.zip",
-  "zip_sha256": "bbbde9340ad4c1c27d3b422ba594481a801077e509e313b47904d6e8d2f94b27",
-  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.30/Sen-0.1.30-portable.zip",
-  "portable_sha256": "6ef5dcd6632758b2de487038b483259bf10c90c5c38cdb1d25a8c574b2b6c264",
+  "url_zip": "https://cdn.jsdelivr.net/gh/178497/sen@main/Sen-Setup-0.1.31.zip",
+  "url_zip_pages": "https://178497.github.io/sen/Sen-Setup-0.1.31.zip",
+  "zip_sha256": "5396683f561144c9ca4b28d18cd6f015d93b294a2bb821796a7ca47c79044095",
+  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.31/Sen-0.1.31-portable.zip",
+  "portable_sha256": "bf6dc2d9d9a0d12a64834c4e60addb88b9a39cc0e16b7c67cd9c10b5af65dac9",
   "portable_size_mb": 15.9,
   "min_version": "0.1.0",
-  "notes": "macOS 上用 open -a 启动 Ollama（.app 不能直接 Popen）；mac 构建脚本增加签名校验、架构提示、PyInstaller 失败定位",
+  "notes": "生图支持 Apple MPS（fp16），Mac 上不再退回 CPU；新增 doctor-mac.command：构建前自检 python3 / CLT / 磁盘 / PyPI / Ollama",
   "highlights": [
-    "macOS 上用 open -a 启动 Ollama（.app 不能直接 Popen）",
-    "mac 构建脚本增加签名校验、架构提示、PyInstaller 失败定位"
+    "生图支持 Apple MPS（fp16），Mac 上不再退回 CPU",
+    "新增 doctor-mac.command：构建前自检 python3 / CLT / 磁盘 / PyPI / Ollama"
   ],
   "update_url": "https://178497.github.io/sen/latest.json"
 }
