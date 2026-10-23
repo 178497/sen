@@ -109,6 +109,87 @@
     h1 { font-size: 32px; }
     a.btn { padding: 13px 18px; font-size: 12px; }
   }
+
+  /* ---------- 动效 ---------- */
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: none; }
+  }
+  .topline, header, .lead, .actions, .hintline, .card, footer {
+    animation: fade-up .7s cubic-bezier(.2, .8, .25, 1) both;
+  }
+  header { animation-delay: .04s; }
+  .lead { animation-delay: .12s; }
+  .actions { animation-delay: .22s; }
+  .hintline { animation-delay: .30s; }
+  .grid .card:nth-child(1) { animation-delay: .38s; }
+  .grid .card:nth-child(2) { animation-delay: .46s; }
+  .grid .card:nth-child(3) { animation-delay: .54s; }
+  footer { animation-delay: .62s; }
+
+  @keyframes dot-pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 9px var(--accent); }
+    50% { opacity: .45; box-shadow: 0 0 2px var(--accent); }
+  }
+  .dot { animation: dot-pulse 2.6s ease-in-out infinite; }
+
+  /* 缓慢下扫的扫描线，极淡 */
+  body::after {
+    content: "";
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 24vh;
+    pointer-events: none;
+    z-index: 0;
+    background: linear-gradient(180deg, transparent, rgba(216, 244, 90, .045), transparent);
+    animation: scan 11s linear infinite;
+  }
+  @keyframes scan {
+    0% { transform: translateY(-26vh); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(108vh); opacity: 0; }
+  }
+  .wrap { position: relative; z-index: 1; }
+
+  a.btn { position: relative; overflow: hidden; }
+  a.btn::after {
+    content: "";
+    position: absolute;
+    top: -20%;
+    bottom: -20%;
+    left: -60%;
+    width: 45%;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .4), transparent);
+    transform: skewX(-18deg);
+    pointer-events: none;
+  }
+  a.btn:hover::after { animation: shine .75s ease; }
+  @keyframes shine {
+    from { left: -60%; }
+    to { left: 130%; }
+  }
+  a.btn.primary { animation: breathe 3.4s ease-in-out infinite; }
+  @keyframes breathe {
+    0%, 100% { box-shadow: 0 0 0 rgba(216, 244, 90, 0); }
+    50% { box-shadow: 0 0 22px rgba(216, 244, 90, .28); }
+  }
+
+  .card { transition: border-color .2s ease, transform .2s ease, background .2s ease; }
+  .card:hover {
+    border-color: var(--accent-dim);
+    transform: translateY(-2px);
+    background: #10150f;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
 </style>
 </head>
 <body>
