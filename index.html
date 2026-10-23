@@ -94,6 +94,36 @@
   .card p { margin: 0; color: #aab5a4; font-size: 13px; }
   code { font-family: var(--mono); color: var(--cyan); }
 
+
+  a.btn.demo { border-color: var(--line); background: rgba(216, 244, 90, .04); color: var(--accent); }
+  a.btn.demo:hover { background: rgba(216, 244, 90, .12); }
+  .changelog { margin: 10px 0 40px; }
+  .changelog h2 {
+    font: 600 10px/1 var(--mono); letter-spacing: .2em; text-transform: uppercase;
+    color: var(--accent); margin: 0 0 16px;
+  }
+  .changelog-list { display: grid; gap: 12px; }
+  .changelog-item {
+    position: relative;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    padding: 14px 18px;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  }
+  .changelog-item h3 {
+    margin: 0 0 8px;
+    font: 600 12px/1 var(--mono);
+    letter-spacing: .12em;
+    color: var(--text);
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .changelog-item h3 span { color: var(--muted); font-weight: 400; letter-spacing: .04em; }
+  .changelog-item ul { margin: 0; padding-left: 16px; display: grid; gap: 3px; }
+  .changelog-item li { font-size: 13px; color: #aab5a4; line-height: 1.6; }
+  .muted { color: var(--muted); font-size: 13px; }
+
   footer {
     border-top: 1px solid var(--line);
     padding-top: 18px;
@@ -216,6 +246,7 @@
   <div class="actions">
     <a class="btn primary" id="download-setup" href="https://github.com/178497/sen/releases/latest">下载安装包 <small id="setup-meta"></small></a>
     <a class="btn" id="download-portable" href="https://github.com/178497/sen/releases/latest">便携版 <small id="portable-meta"></small></a>
+    <a class="btn demo" href="https://178497.github.io/sen/demo/?demo=1" target="_blank" rel="noopener">在线体验 ↗</a>
   </div>
   <p class="hintline">安装包 = 开始菜单 + 卸载项 + 自动更新；便携版 = 解压即用。两者数据都保存在 <code>%LOCALAPPDATA%\Sen</code>。</p>
 
@@ -234,6 +265,11 @@
     </div>
   </div>
 
+  <section class="changelog">
+    <h2>更新日志</h2>
+    <div id="changelog-list" class="changelog-list"><p class="muted">正在读取…</p></div>
+  </section>
+
   <footer>
     当前版本 <b id="version-foot">—</b> · SHA-256 <code id="sha">—</code><br>
     安装包未签名，首次运行 Windows 可能提示"未知发布者"，点「更多信息 → 仍要运行」即可。<br>
@@ -246,6 +282,34 @@
   document.getElementById("setup-meta").textContent = "v0.1.13 · 15.3 MB";
   document.getElementById("portable-meta").textContent = "v0.1.13 · 15.8 MB";
   document.getElementById("version-foot").textContent = "0.1.13";
+
+
+  fetch("changelog.json", { cache: "no-store" })
+    .then(response => response.ok ? response.json() : null)
+    .then(list => {
+      if (!Array.isArray(list) || !list.length) return;
+      const box = document.getElementById("changelog-list");
+      box.innerHTML = "";
+      list.slice(0, 8).forEach(entry => {
+        const item = document.createElement("article");
+        item.className = "changelog-item";
+        const head = document.createElement("h3");
+        head.textContent = "v" + entry.version;
+        const date = document.createElement("span");
+        date.textContent = entry.date || "";
+        head.appendChild(date);
+        item.appendChild(head);
+        const ul = document.createElement("ul");
+        (entry.highlights || []).forEach(line => {
+          const li = document.createElement("li");
+          li.textContent = line;
+          ul.appendChild(li);
+        });
+        item.appendChild(ul);
+        box.appendChild(item);
+      });
+    })
+    .catch(() => {});
 
   fetch("latest.json", { cache: "no-store" })
     .then(response => response.ok ? response.json() : null)
