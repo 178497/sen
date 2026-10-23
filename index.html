@@ -243,7 +243,8 @@
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.03);
     }
-    .mac-note b { display: block; font-size: 13px; margin-bottom: 8px; letter-spacing: .04em; }
+    .mac-note > b:first-child { display: block; font-size: 13px; margin-bottom: 8px; letter-spacing: .04em; }
+    .mac-note p b { display: inline; color: #d7e6c8; }
     .mac-note p { margin: 6px 0; font-size: 13px; line-height: 1.75; color: rgba(235,240,230,.72); }
     .mac-note code {
       display: inline-block;
@@ -290,7 +291,7 @@
     <p>支持 Apple Silicon（M1 及以上），系统要求 macOS 11+。安装包没有签名和公证，第一次打开需要：右键点 Sen.app → 打开，或在终端执行：</p>
     <code>xattr -dr com.apple.quarantine /Applications/Sen.app</code>
     <p>macOS 上的训练走 fp16 LoRA（不使用 4-bit 量化），速度比 NVIDIA 显卡慢，但功能一致。数据保存在 <code>~/Library/Application Support/Sen</code>。</p>
-    <p><b>当前状态</b>：macOS 安装包由本机构建产出，上传到 Release 后这里会自动变成下载链接。</p>
+    <p id="mac-status"><b>当前状态</b>：macOS 安装包由本机构建产出，上传到 Release 后这里会自动变成下载链接。</p>
   </div>
 
   <div class="grid">
@@ -405,10 +406,13 @@
       const mac = document.getElementById("download-mac");
       const macMeta = document.getElementById("mac-meta");
       const macNote = document.getElementById("mac-note");
+      const macStatus = document.getElementById("mac-status");
       if (data.macos_url) {
         mac.href = data.macos_url;
         if (macMeta) macMeta.textContent = data.macos_size_mb ? `${data.macos_size_mb} MB` : "";
+        if (macStatus) macStatus.hidden = true;
       } else {
+        if (macStatus) macStatus.hidden = false;
         if (macMeta) macMeta.textContent = "内测";
         if (macNote) macNote.hidden = false;
       }
