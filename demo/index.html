@@ -1060,13 +1060,14 @@
       display: grid;
       place-items: center;
       overflow: auto;
-      background: rgba(3, 5, 3, .82);
-      backdrop-filter: blur(12px);
+      /* 这里不能用 backdrop-filter：Chromium 会让子元素绘制顺序错乱，
+         底部工具栏会被内容“透出来”，看起来像重叠 */
+      background: rgba(3, 5, 3, .92);
     }
     .training-backdrop[hidden] { display: none; }
     .training-window {
-      width: min(980px, 100%);
-      height: min(710px, calc(100dvh - 24px));
+      width: min(1020px, 100%);
+      height: min(880px, calc(100dvh - 24px));
       max-height: calc(100dvh - 24px);
       min-height: 0;
       display: grid;
@@ -1102,15 +1103,23 @@
     }
     .training-close:hover { color: var(--accent); border-color: var(--accent-dim); }
     .training-body {
+      position: relative;
+      z-index: 1;
       min-height: 0;
-      padding: 20px 22px 22px;
-      display: grid;
-      grid-template-rows: auto auto auto auto minmax(0, 1fr) auto;
+      padding: 20px 22px 18px;
+      display: flex;
+      flex-direction: column;
       gap: 14px;
       overflow-y: auto;
+      overflow-x: hidden;
+      isolation: isolate;
+      clip-path: inset(0 0 0 0);
+      overscroll-behavior: contain;
       scrollbar-width: thin;
       scrollbar-color: #414b3b transparent;
     }
+    .training-body > * { flex: 0 0 auto; }
+    .training-log { flex: 1 1 auto; min-height: 96px; }
     .training-data-row {
       display: flex;
       align-items: stretch;
@@ -1831,12 +1840,15 @@
 
     /* ---------- training history ---------- */
     .throttle-bar {
+      position: relative;
+      z-index: 2;
       display: flex;
       align-items: center;
       gap: 14px;
       padding: 7px 22px;
       border-top: 1px solid var(--line);
-      background: rgba(9, 12, 9, .72);
+      background: #0b0f0b;
+      box-shadow: 0 -10px 0 #0b0f0b;
       color: #7c8674;
       font: 600 9px/1 "Bahnschrift", "Consolas", sans-serif;
       letter-spacing: .12em;
@@ -4411,6 +4423,33 @@
       color: var(--accent);
     }
 
+
+    .wizard-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--accent);
+      font: 600 10px/1.4 var(--font-mono);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .wizard-caret { transition: transform .2s ease; color: var(--muted); }
+    .training-wizard.collapsed .wizard-caret { transform: rotate(-90deg); }
+    .training-wizard.collapsed .wizard-body { display: none; }
+    .wizard-body { margin-top: 10px; }
+    .training-wizard.collapsed { padding: 10px 16px; }
+    .training-wizard.collapsed .wizard-head { color: var(--muted); text-transform: none; letter-spacing: .02em; font-family: var(--font-ui); font-size: 12px; }
+    .wizard-input { min-height: 46px; }
+    .wizard-plan { padding: 9px 12px; }
+    .wizard-plan h4 { font-size: 12.5px; }
+    .wizard-plan p { display: none; }
+    .wizard-plan .plan-meta { margin-top: 3px; }
+
     /* 演示模式 */
     .demo-ribbon {
       position: fixed;
@@ -4823,7 +4862,11 @@
           <div class="training-stat"><span>ADAPTER</span><b id="training-adapter">NONE</b></div>
         </div>
         <div class="training-wizard" id="training-wizard">
-          <div class="wizard-head">告诉森你的需求，它来推荐训练方案</div>
+          <button class="wizard-head" id="wizard-toggle" type="button" aria-expanded="true">
+            <span id="wizard-title">告诉森你的需求，它来推荐训练方案</span>
+            <i class="wizard-caret">▾</i>
+          </button>
+          <div class="wizard-body" id="wizard-body">
           <textarea id="training-want" class="wizard-input" rows="2"
             placeholder="例如：我想让它当客服，回答售后问题；或者：学会我写公众号的语气"></textarea>
           <div class="wizard-chips" id="wizard-chips">
@@ -4839,6 +4882,7 @@
             <span class="wizard-hint" id="wizard-hint">不用写得很正式，一句话就行</span>
           </div>
           <div class="wizard-plans" id="wizard-plans" hidden></div>
+          </div>
         </div>
 
         <div class="training-progress-card">
@@ -7763,10 +7807,12 @@
           const limit = document.getElementById("training-limit");
           if (query && plan.search_query) query.value = plan.search_query;
           if (limit && plan.samples) limit.value = String(plan.samples);
-          if (wizardHint) {
-            wizardHint.textContent =
-              `已设为 ${plan.epochs} 轮（约 ${plan.minutes} 分钟），正在按「${plan.domain}」找样本…`;
+          const wizardTitle = document.getElementById("wizard-title");
+          if (wizardTitle) {
+            wizardTitle.textContent =
+              `方案：${plan.domain} · ${plan.name} · ${plan.epochs} 轮（约 ${plan.minutes} 分钟）· 点这里可改`;
           }
+          setWizardCollapsed(true);
           document.getElementById("training-search")?.click();
         });
         card.append(info, use);
@@ -7795,6 +7841,19 @@
         if (wizardHint) wizardHint.textContent = error.message || "推荐失败";
       }
     }
+
+    function setWizardCollapsed(collapsed) {
+      const wizard = document.getElementById("training-wizard");
+      const toggle = document.getElementById("wizard-toggle");
+      if (!wizard) return;
+      wizard.classList.toggle("collapsed", collapsed);
+      if (toggle) toggle.setAttribute("aria-expanded", collapsed ? "false" : "true");
+    }
+
+    document.getElementById("wizard-toggle")?.addEventListener("click", () => {
+      const wizard = document.getElementById("training-wizard");
+      setWizardCollapsed(!wizard.classList.contains("collapsed"));
+    });
 
     wizardSuggest?.addEventListener("click", suggestPlans);
     document.getElementById("wizard-chips")?.addEventListener("click", event => {
