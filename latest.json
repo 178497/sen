@@ -1,1 +1,15 @@
-null
+{
+  "version": "0.1.4",
+  "channel": "beta",
+  "url": "https://github.com/178497/sen/releases/download/v0.1.4/Sen-Setup-0.1.4.exe",
+  "sha256": "6237ae066611d0c0a8f68b308e9e4315da8c7859b016cbdc21ddac80cc7b019c",
+  "size_mb": 14.1,
+  "url_zip": "https://cdn.jsdelivr.net/gh/178497/sen@main/Sen-Setup-0.1.4.zip",
+  "zip_sha256": "fa1e6847ed2570ade7473441a95e32113fc5ee3548c803c69b6d5c613fca40f5",
+  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.4/Sen-0.1.4-portable.zip",
+  "portable_sha256": "0124db63ab2dfbac28b4b549666f43e7ad73f921d8a8da01538f51f9919010ec",
+  "portable_size_mb": 14.5,
+  "min_version": "0.1.0",
+  "notes": "默认主题改为「森 · 全息」",
+  "update_url": "https://cdn.jsdelivr.net/gh/178497/sen@main/latest.json"
+}
