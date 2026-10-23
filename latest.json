@@ -1,15 +1,15 @@
 {
-  "version": "0.1.2",
+  "version": "0.1.3",
   "channel": "beta",
-  "url": "https://github.com/178497/sen/releases/download/v0.1.2/Sen-Setup-0.1.2.exe",
-  "sha256": "76504b69de7777016a6a741e05901798590be61adc7300a3569e33769c4e1753",
+  "url": "https://github.com/178497/sen/releases/download/v0.1.3/Sen-Setup-0.1.3.exe",
+  "sha256": "5b2e9af5bfa27203f1dda4ea6518710674c69fbc89ded3979aeae192af69e49a",
   "size_mb": 14.1,
-  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.2/Sen-0.1.2-portable.zip",
-  "portable_sha256": "f23788e28acf73c4f2d8113d611a80d77418b4e74aa0c8aff9025b4d1942c4e8",
+  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.3/Sen-0.1.3-portable.zip",
+  "portable_sha256": "e659320a0881be8265f1fea2e84bf7406a40422ceadeb07c2b07deeda8a4f09b",
   "portable_size_mb": 14.5,
   "min_version": "0.1.0",
-  "notes": "更新包改用 CDN（zip），下载更快",
-  "url_zip": "https://cdn.jsdelivr.net/gh/178497/sen@main/Sen-Setup-0.1.2.zip",
-  "zip_sha256": "b95a43f4aa404c31c589e78a2ddeb5101f084939b14f7cd18963f843a032c15a",
+  "notes": "安装器改为纯用户级安装，不再弹 UAC；首次安装可自选目录",
+  "url_zip": "https://cdn.jsdelivr.net/gh/178497/sen@main/Sen-Setup-0.1.3.zip",
+  "zip_sha256": "ba0dc200c5f7889b4d3316bad7096de457accc4b23aee4f8c7ed6551b9bfb4d1",
   "update_url": "https://cdn.jsdelivr.net/gh/178497/sen@main/latest.json"
 }
