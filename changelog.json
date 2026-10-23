@@ -1,5 +1,13 @@
 [
   {
+    "version": "0.1.31",
+    "date": "2026-10-24",
+    "highlights": [
+      "生图支持 Apple MPS（fp16），Mac 上不再退回 CPU",
+      "新增 doctor-mac.command：构建前自检 python3 / CLT / 磁盘 / PyPI / Ollama"
+    ]
+  },
+  {
     "version": "0.1.30",
     "date": "2026-10-24",
     "highlights": [
