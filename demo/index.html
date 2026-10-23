@@ -4293,6 +4293,56 @@
 
 
 
+
+    /* 新手引导 */
+    .tour { position: fixed; inset: 0; z-index: 120; }
+    .tour-spot {
+      position: absolute;
+      border-radius: 14px;
+      border: 2px solid var(--accent, #d8f45a);
+      box-shadow: 0 0 0 9999px rgba(4, 6, 4, .72);
+      transition: all .28s cubic-bezier(.2, .8, .25, 1);
+      pointer-events: none;
+    }
+    .tour-card {
+      position: absolute;
+      width: min(330px, calc(100vw - 40px));
+      padding: 16px 18px 14px;
+      background: var(--surface, #131713);
+      border: 1px solid var(--line, #30372f);
+      border-radius: 14px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, .45);
+      transition: all .28s cubic-bezier(.2, .8, .25, 1);
+    }
+    .tour-step {
+      font: 600 10px/1 var(--font-mono, monospace);
+      letter-spacing: .16em;
+      color: var(--accent, #d8f45a);
+      margin-bottom: 8px;
+    }
+    .tour-card h3 { margin: 0 0 6px; font-size: 15px; color: var(--paper, #eef0e8); }
+    .tour-card p { margin: 0 0 14px; font-size: 12.5px; line-height: 1.65; color: var(--muted, #8d9689); }
+    .tour-actions { display: flex; justify-content: flex-end; gap: 8px; }
+    .tour-actions button {
+      padding: 7px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--line, #30372f);
+      background: transparent;
+      color: var(--muted, #8d9689);
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .tour-actions .tour-next {
+      background: var(--accent, #d8f45a);
+      border-color: var(--accent, #d8f45a);
+      color: #0b120b;
+      font-weight: 600;
+    }
+    html[data-theme="candy"] .tour-card { border-radius: 18px; border-color: #ffd3e1; }
+    html[data-theme="candy"] .tour-actions .tour-next { color: #fff; background: #ff8fb6; border-color: #ff8fb6; }
+    html[data-theme="paper"] .tour-actions .tour-next { color: #fff8ef; }
+    html[data-theme="glass"] .tour-card { border-radius: 18px; }
+
     /* 演示模式 */
     .demo-ribbon {
       position: fixed;
@@ -4768,6 +4818,20 @@
     </section>
   </div>
 
+
+  <div class="tour" id="tour" hidden>
+    <div class="tour-spot" id="tour-spot"></div>
+    <div class="tour-card" id="tour-card" role="dialog" aria-live="polite">
+      <div class="tour-step" id="tour-step">1 / 5</div>
+      <h3 id="tour-title"></h3>
+      <p id="tour-text"></p>
+      <div class="tour-actions">
+        <button type="button" class="tour-skip" id="tour-skip">跳过</button>
+        <button type="button" class="tour-next" id="tour-next">下一步</button>
+      </div>
+    </div>
+  </div>
+
   <div class="update-banner" id="update-banner" hidden>
     <div class="update-copy">
       <b id="update-title">发现新版本</b>
@@ -4900,6 +4964,10 @@
             <button class="training-btn" id="set-check-update" type="button">检查更新</button>
           </label>
           <p class="settings-hint" id="set-update-status"></p>
+          <label class="settings-row">
+            <span>新手引导</span>
+            <button class="training-btn" id="set-tour" type="button">重新观看</button>
+          </label>
         </div>
 
         <div class="settings-section">
@@ -7901,6 +7969,151 @@
       document.title = "森 · 预览";
     }
 
+
+    /* ---------------- 新手引导 ---------------- */
+    const TOUR_KEY = "sen.tour.done";
+    const tourSteps = [
+      {
+        selector: "nav.modes",
+        fallback: "aside",
+        title: "三种使用模式",
+        text: "知识库问答会先在本地资料里检索再回答；编程辅助偏向写代码；通用聊天就是日常对话。"
+      },
+      {
+        selector: "#messages",
+        title: "这里是对话区",
+        text: "回答下面会展示思考轨迹 —— 用了哪些片段、花了多少毫秒，都能看见。"
+      },
+      {
+        selector: "#composer",
+        title: "在输入框里提问",
+        text: "回车发送，Shift + 回车换行。左边的 ＋ 可以带图片，让森看图。"
+      },
+      {
+        selector: ".tools",
+        title: "左侧工具栏",
+        text: "训练模型、重建知识库、模型接入都在这里。训练进度会实时显示。"
+      },
+      {
+        selector: "#settings",
+        title: "所有设置都在这儿",
+        text: "外观主题、声音、朗读音色、组件都在设置里。以后想重看这个引导，也在设置 → 关于。"
+      }
+    ];
+
+    let tourIndex = 0;
+    let tourActive = false;
+
+    function tourElements() {
+      return {
+        root: document.getElementById("tour"),
+        spot: document.getElementById("tour-spot"),
+        card: document.getElementById("tour-card"),
+        step: document.getElementById("tour-step"),
+        title: document.getElementById("tour-title"),
+        text: document.getElementById("tour-text"),
+        next: document.getElementById("tour-next")
+      };
+    }
+
+    function placeTour() {
+      const el = tourElements();
+      if (!el.root || !tourActive) return;
+      const step = tourSteps[tourIndex];
+      const target =
+        document.querySelector(step.selector) ||
+        (step.fallback ? document.querySelector(step.fallback) : null);
+      el.step.textContent = `${tourIndex + 1} / ${tourSteps.length}`;
+      el.title.textContent = step.title;
+      el.text.textContent = step.text;
+      el.next.textContent = tourIndex === tourSteps.length - 1 ? "开始使用" : "下一步";
+      if (!target) {
+        endTour();
+        return;
+      }
+      const box = target.getBoundingClientRect();
+      const pad = 8;
+      el.spot.style.left = `${Math.max(4, box.left - pad)}px`;
+      el.spot.style.top = `${Math.max(4, box.top - pad)}px`;
+      el.spot.style.width = `${Math.min(window.innerWidth - 8, box.width + pad * 2)}px`;
+      el.spot.style.height = `${Math.min(window.innerHeight - 8, box.height + pad * 2)}px`;
+
+      const cardWidth = el.card.offsetWidth || 330;
+      const cardHeight = el.card.offsetHeight || 160;
+      const gap = 16;
+      let left;
+      let top;
+      const roomRight = window.innerWidth - box.right;
+      const roomLeft = box.left;
+      if (roomRight > cardWidth + gap * 2 && box.width < window.innerWidth * 0.7) {
+        left = box.right + gap;
+        top = Math.max(16, Math.min(box.top, window.innerHeight - cardHeight - 16));
+      } else if (roomLeft > cardWidth + gap * 2) {
+        left = box.left - cardWidth - gap;
+        top = Math.max(16, Math.min(box.top, window.innerHeight - cardHeight - 16));
+      } else {
+        left = Math.max(16, Math.min(box.left + box.width / 2 - cardWidth / 2, window.innerWidth - cardWidth - 16));
+        top = box.bottom + gap;
+        if (top + cardHeight > window.innerHeight - 16) {
+          top = Math.max(16, box.top - cardHeight - gap);
+        }
+      }
+      el.card.style.left = `${left}px`;
+      el.card.style.top = `${top}px`;
+    }
+
+    function startTour() {
+      const el = tourElements();
+      if (!el.root) return;
+      tourActive = true;
+      tourIndex = 0;
+      el.root.hidden = false;
+      placeTour();
+    }
+
+    function nextTour() {
+      if (!tourActive) return;
+      if (tourIndex >= tourSteps.length - 1) {
+        endTour(true);
+        return;
+      }
+      tourIndex += 1;
+      placeTour();
+    }
+
+    function endTour(completed = false) {
+      const el = tourElements();
+      tourActive = false;
+      if (el.root) el.root.hidden = true;
+      if (completed) {
+        try {
+          localStorage.setItem(TOUR_KEY, "1");
+        } catch {}
+      }
+    }
+
+    function maybeStartTour() {
+      if (window.SEN_DEMO) {
+        try {
+          if (!localStorage.getItem(TOUR_KEY)) startTour();
+        } catch {}
+        return;
+      }
+      try {
+        if (!localStorage.getItem(TOUR_KEY)) startTour();
+      } catch {}
+    }
+
+    document.getElementById("set-tour")?.addEventListener("click", () => {
+      closeSettingsPanel();
+      window.setTimeout(startTour, 220);
+    });
+    document.getElementById("tour-next")?.addEventListener("click", nextTour);
+    document.getElementById("tour-skip")?.addEventListener("click", () => endTour(true));
+    window.addEventListener("resize", () => {
+      if (tourActive) placeTour();
+    });
+
     async function submit() {
       const text = input.value.trim();
       if (!text || busy) return;
@@ -8284,6 +8497,7 @@
     }
     initDemoMode();
     initAudio();
+    window.setTimeout(maybeStartTour, 900);
     initSfx();
     initThrottle();
     initSettings();
