@@ -123,6 +123,22 @@
   .changelog-item ul { margin: 0; padding-left: 16px; display: grid; gap: 3px; }
   .changelog-item li { font-size: 13px; color: #aab5a4; line-height: 1.6; }
   .muted { color: var(--muted); font-size: 13px; }
+  .changelog-item.era { background: rgba(255, 255, 255, .02); border-style: dashed; }
+  .changelog-item.era h3 { color: #c8d3c3; }
+  .changelog-more {
+    justify-self: start;
+    margin-top: 2px;
+    padding: 9px 18px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--muted);
+    font: 600 11px/1 var(--mono);
+    letter-spacing: .1em;
+    cursor: pointer;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  }
+  .changelog-more:hover { color: var(--accent); border-color: var(--accent-dim); }
+
 
   footer {
     border-top: 1px solid var(--line);
@@ -290,7 +306,40 @@
       if (!Array.isArray(list) || !list.length) return;
       const box = document.getElementById("changelog-list");
       box.innerHTML = "";
-      list.slice(0, 8).forEach(entry => {
+      const render = (entry, dim) => {
+        const item = document.createElement("article");
+        item.className = "changelog-item" + (dim ? " era" : "");
+        const head = document.createElement("h3");
+        head.textContent = entry.title || ("v" + entry.version);
+        const date = document.createElement("span");
+        date.textContent = entry.date || "";
+        head.appendChild(date);
+        item.appendChild(head);
+        const ul = document.createElement("ul");
+        (entry.highlights || []).forEach(line => {
+          const li = document.createElement("li");
+          li.textContent = line;
+          ul.appendChild(li);
+        });
+        item.appendChild(ul);
+        return item;
+      };
+      const visible = list.slice(0, 8).map(item => [item, false]);
+      const rest = list.slice(8).map(item => [item, false]);
+      visible.forEach(([entry]) => box.appendChild(render(entry)));
+      const more = document.createElement("button");
+      more.type = "button";
+      more.className = "changelog-more";
+      more.textContent = `查看更早的 ${rest.length} 条 ↓`;
+      box.appendChild(more);
+      let expanded = false;
+      more.addEventListener("click", () => {
+        if (expanded) return;
+        expanded = true;
+        more.remove();
+        rest.forEach(([entry]) => box.appendChild(render(entry)));
+      });
+      if (false) list.slice(0, 8).forEach(entry => {
         const item = document.createElement("article");
         item.className = "changelog-item";
         const head = document.createElement("h3");
