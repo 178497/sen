@@ -4827,10 +4827,12 @@
           <textarea id="training-want" class="wizard-input" rows="2"
             placeholder="例如：我想让它当客服，回答售后问题；或者：学会我写公众号的语气"></textarea>
           <div class="wizard-chips" id="wizard-chips">
-            <button type="button" data-example="我想让它当客服，回答售后和常见问题">客服问答</button>
-            <button type="button" data-example="想让它学会我写公众号的语气和用词">写作口吻</button>
-            <button type="button" data-example="帮我写代码，风格和我现在的习惯一致">代码助手</button>
-            <button type="button" data-example="想要一个陪伴型的人设，称呼我宝宝">陪伴人设</button>
+            <button type="button" data-example="我高三，想让它帮我讲数学题，先给答案再讲步骤">学科答疑</button>
+            <button type="button" data-example="准备考研，想按评分标准答题，得分点要露出来">考试刷题</button>
+            <button type="button" data-example="写毕业论文，需要文献综述和学术表达">论文写作</button>
+            <button type="button" data-example="java 课程设计总报错，想要能直接跑的代码">编程作业</button>
+            <button type="button" data-example="四级英语，翻译和背单词，术语要统一">英语翻译</button>
+            <button type="button" data-example="考研压力大，想找个树洞，先接住情绪再给建议">心理树洞</button>
           </div>
           <div class="wizard-actions">
             <button class="training-btn" id="wizard-suggest" type="button">推荐方案</button>
@@ -7736,7 +7738,8 @@
       wizardPlans.hidden = false;
       const summary = document.createElement("div");
       summary.className = "wizard-summary";
-      summary.innerHTML = `判断为 <b>${result.domain}</b> · ${result.focus}（${result.generated_plans_note}）`;
+      summary.innerHTML = `判断为 <b>${result.domain}</b> · ${result.focus}（${result.generated_plans_note}）` +
+        (result.search_query ? `<br><span class="wizard-hint">会按「${result.search_query}」去找样本</span>` : "");
       wizardPlans.appendChild(summary);
       result.plans.forEach(plan => {
         const card = document.createElement("div");
@@ -7756,10 +7759,15 @@
         use.textContent = "用这个方案";
         use.addEventListener("click", () => {
           trainingEpochs.value = String(plan.epochs);
+          const query = document.getElementById("training-query");
+          const limit = document.getElementById("training-limit");
+          if (query && plan.search_query) query.value = plan.search_query;
+          if (limit && plan.samples) limit.value = String(plan.samples);
           if (wizardHint) {
-            wizardHint.textContent = `已设为 ${plan.epochs} 轮，预计约 ${plan.minutes} 分钟`;
+            wizardHint.textContent =
+              `已设为 ${plan.epochs} 轮（约 ${plan.minutes} 分钟），正在按「${plan.domain}」找样本…`;
           }
-          document.getElementById("training-start")?.click();
+          document.getElementById("training-search")?.click();
         });
         card.append(info, use);
         wizardPlans.appendChild(card);
