@@ -1,16 +1,16 @@
 {
-  "version": "0.1.5",
+  "version": "0.1.6",
   "channel": "beta",
-  "url": "https://github.com/178497/sen/releases/download/v0.1.5/Sen-Setup-0.1.5.exe",
-  "sha256": "779c33ae571c15efd062b91a300ae0b38cdf34859365389406941f2edcbdb346",
-  "size_mb": 14.1,
-  "url_zip": "https://cdn.jsdelivr.net/gh/178497/sen@main/Sen-Setup-0.1.5.zip",
-  "zip_sha256": "94fe262795bfec6aa73c15df860ab7b307140902ae462a717edee733f7fe6d8f",
-  "url_zip_pages": "https://178497.github.io/sen/Sen-Setup-0.1.5.zip",
-  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.5/Sen-0.1.5-portable.zip",
-  "portable_sha256": "b37eb082a8e582f3b07c2e1c91ba257ae8d1d5efae63293b1f88830b6054eed2",
-  "portable_size_mb": 14.5,
+  "url": "https://github.com/178497/sen/releases/download/v0.1.6/Sen-Setup-0.1.6.exe",
+  "sha256": "6cc642c3705481e076c2ed89e06aa44c8a279ba37d57fbb74e00479d52425b83",
+  "size_mb": 15.2,
+  "url_zip": "https://cdn.jsdelivr.net/gh/178497/sen@main/Sen-Setup-0.1.6.zip",
+  "url_zip_pages": "https://178497.github.io/sen/Sen-Setup-0.1.6.zip",
+  "zip_sha256": "6c0eb5b7feb8623b2a2d7e1832a1dc52ae7ceb5d10be39d4f0ca35b5150d42fe",
+  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.6/Sen-0.1.6-portable.zip",
+  "portable_sha256": "26dfdc9d6528a72bfe6a4cda0ff03d306a452a8b434cee6f0615288ee01654c5",
+  "portable_size_mb": 15.8,
   "min_version": "0.1.0",
-  "notes": "朗读更自然：可选音色、按句朗读；更新下载支持多源重试",
-  "update_url": "https://cdn.jsdelivr.net/gh/178497/sen@main/latest.json"
+  "notes": "朗读改用神经语音；更新源改为 GitHub Pages 优先",
+  "update_url": "https://178497.github.io/sen/latest.json"
 }
