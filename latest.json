@@ -1,20 +1,22 @@
 {
-  "version": "0.1.28",
+  "version": "0.1.29",
   "channel": "beta",
-  "url": "https://github.com/178497/sen/releases/download/v0.1.28/Sen-Setup-0.1.28.exe",
-  "sha256": "8a0172e881897c37f9753786b0a35d03cc13ab6f4270643383adebe66cde3b6a",
+  "url": "https://github.com/178497/sen/releases/download/v0.1.29/Sen-Setup-0.1.29.exe",
+  "sha256": "35857325c4d657d93f7dc835d44234beb201c7983ae82fc1dea56dac0a02749a",
   "size_mb": 15.3,
-  "url_zip": "https://cdn.jsdelivr.net/gh/178497/sen@main/Sen-Setup-0.1.28.zip",
-  "url_zip_pages": "https://178497.github.io/sen/Sen-Setup-0.1.28.zip",
-  "zip_sha256": "ee2de3b2e0d1ec82ec72d1e386ad1768aeee1210166b6a8f19f17161bc8a61de",
-  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.28/Sen-0.1.28-portable.zip",
-  "portable_sha256": "5e0b792b4488b8fb29d1ffc4486f4aa9e79c436c87587595837a65a50fc14f04",
+  "url_zip": "https://cdn.jsdelivr.net/gh/178497/sen@main/Sen-Setup-0.1.29.zip",
+  "url_zip_pages": "https://178497.github.io/sen/Sen-Setup-0.1.29.zip",
+  "zip_sha256": "a9eb660d0dfc99a649bad606264abb93f5f84dc622abc50e07378da32b69ad58",
+  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.29/Sen-0.1.29-portable.zip",
+  "portable_sha256": "aa523275df14b10b3412b3ba6ad8ec976f107e5459272afc44c81f19c34f172a",
   "portable_size_mb": 15.9,
   "min_version": "0.1.0",
-  "notes": "macOS 兼容修正：webview 存储参数、窗口尺寸、数据目录按平台分支；为 macOS 版补充打包脚本、训练脚本与安装说明",
+  "notes": "macOS 分支补齐：Ollama 应用路径（/Applications/Ollama.app）；macOS 启动失败时改用系统弹窗提示，不再是 Windows 专属 MessageBox；模型配置在 mac 上写入 ~/Library/Application Support/Sen；cudnn 只在 CUDA 上设置，避免 MPS 报错",
   "highlights": [
-    "macOS 兼容修正：webview 存储参数、窗口尺寸、数据目录按平台分支",
-    "为 macOS 版补充打包脚本、训练脚本与安装说明"
+    "macOS 分支补齐：Ollama 应用路径（/Applications/Ollama.app）",
+    "macOS 启动失败时改用系统弹窗提示，不再是 Windows 专属 MessageBox",
+    "模型配置在 mac 上写入 ~/Library/Application Support/Sen",
+    "cudnn 只在 CUDA 上设置，避免 MPS 报错"
   ],
   "update_url": "https://178497.github.io/sen/latest.json"
 }
