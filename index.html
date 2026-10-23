@@ -7,117 +7,172 @@
 <style>
   :root {
     color-scheme: dark;
-    --bg: #06090f;
-    --panel: rgba(255,255,255,.045);
-    --line: rgba(140,180,220,.16);
-    --text: #e8f2ff;
-    --muted: #7f93a8;
-    --accent: #4fd1c5;
+    --void: #060806;
+    --panel: #0c0f0c;
+    --line: #2b332a;
+    --line-soft: rgba(150, 175, 140, .16);
+    --text: #eef0e8;
+    --muted: #8d9689;
+    --accent: #d8f45a;
+    --accent-dim: #96ad36;
+    --cyan: #83c8bd;
+    --mono: "Bahnschrift", "Consolas", monospace;
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
     min-height: 100vh;
     background:
-      radial-gradient(60% 50% at 15% 0%, rgba(60,120,255,.22), transparent 60%),
-      radial-gradient(50% 45% at 85% 15%, rgba(255,90,160,.18), transparent 60%),
-      radial-gradient(55% 50% at 70% 100%, rgba(60,230,200,.18), transparent 60%),
-      var(--bg);
+      linear-gradient(rgba(216, 244, 90, .028) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(216, 244, 90, .028) 1px, transparent 1px),
+      radial-gradient(70% 55% at 18% 0%, rgba(216, 244, 90, .07), transparent 62%),
+      radial-gradient(50% 45% at 92% 100%, rgba(131, 200, 189, .06), transparent 60%),
+      var(--void);
+    background-size: 46px 46px, 46px 46px, auto, auto, auto;
     color: var(--text);
     font: 15px/1.75 "Microsoft YaHei UI", "PingFang SC", sans-serif;
-    display: grid;
-    place-items: center;
-    padding: 48px 20px;
+    padding: 0 20px 60px;
   }
-  main { width: min(880px, 100%); }
-  .brand { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
-  .brand img { width: 46px; height: 46px; border-radius: 12px; }
-  .brand h1 { margin: 0; font-size: 30px; letter-spacing: .06em; }
-  .tag { color: var(--muted); font-size: 13px; letter-spacing: .18em; text-transform: uppercase; }
-  p.lead { color: #b9c8d8; margin: 18px 0 26px; }
-  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 30px; }
+  .wrap { width: min(920px, 100%); margin: 0 auto; }
+
+  .topline {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 0 14px;
+    border-bottom: 1px solid var(--line);
+    font: 600 10px/1 var(--mono);
+    letter-spacing: .18em;
+    color: var(--muted);
+  }
+  .topline b { color: var(--accent); font-weight: 600; }
+  .dot { display: inline-block; width: 6px; height: 6px; margin-right: 7px; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+
+  header { padding: 46px 0 34px; display: flex; gap: 20px; align-items: center; }
+  header img { width: 64px; height: 64px; border: 1px solid var(--line); clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px); }
+  h1 { margin: 0; font: 600 42px/1.1 "Microsoft YaHei UI", sans-serif; letter-spacing: .04em; }
+  .kicker { font: 600 10px/1 var(--mono); letter-spacing: .3em; color: var(--accent-dim); margin-bottom: 8px; }
+  .lead { color: #b6c0b0; max-width: 620px; margin: 0 0 34px; }
+
+  .actions { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 12px; }
   a.btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 13px 22px;
-    border-radius: 12px;
-    border: 1px solid var(--line);
-    background: var(--panel);
+    display: inline-flex; align-items: baseline; gap: 10px;
+    padding: 15px 26px;
+    border: 1px solid var(--accent-dim);
     color: var(--text);
     text-decoration: none;
-    font-weight: 600;
-    transition: transform .15s ease, border-color .15s ease, background .15s ease;
+    font: 600 13px/1 var(--mono);
+    letter-spacing: .1em;
+    clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+    background: rgba(216, 244, 90, .06);
+    transition: background .16s ease, transform .16s ease;
   }
-  a.btn:hover { transform: translateY(-1px); border-color: var(--accent); }
-  a.btn.primary { background: linear-gradient(135deg, #22c1c3, #3b82f6); border-color: transparent; color: #04121a; }
-  a.btn small { font-weight: 400; opacity: .8; }
-  .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  a.btn:hover { background: rgba(216, 244, 90, .14); transform: translateY(-1px); }
+  a.btn.primary { background: var(--accent); color: #0b120b; border-color: var(--accent); }
+  a.btn.primary:hover { background: #e4ff78; }
+  a.btn small { font-weight: 400; opacity: .72; letter-spacing: .04em; }
+
+  .hintline { font: 500 11px/1.7 var(--mono); color: var(--muted); margin: 0 0 40px; }
+  .hintline b { color: var(--accent); font-weight: 500; }
+
+  .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); margin-bottom: 40px; }
   .card {
+    position: relative;
     border: 1px solid var(--line);
-    border-radius: 14px;
     background: var(--panel);
-    padding: 16px 18px;
+    padding: 18px 18px 16px;
+    clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
   }
-  .card h2 { margin: 0 0 8px; font-size: 14px; letter-spacing: .08em; color: var(--accent); }
-  .card p { margin: 0; color: #a9bacb; font-size: 13px; }
-  footer { margin-top: 32px; color: #6f8199; font-size: 12px; line-height: 1.9; }
-  code { background: rgba(255,255,255,.07); padding: 1px 6px; border-radius: 5px; font-size: 12px; }
+  .card::before {
+    content: ""; position: absolute; left: 0; top: 0; width: 26px; height: 1px; background: var(--accent);
+  }
+  .card h2 {
+    margin: 0 0 10px;
+    font: 600 10px/1 var(--mono);
+    letter-spacing: .18em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  .card p { margin: 0; color: #aab5a4; font-size: 13px; }
+  code { font-family: var(--mono); color: var(--cyan); }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding-top: 18px;
+    font: 500 11px/2 var(--mono);
+    color: var(--muted);
+    letter-spacing: .04em;
+  }
+  footer b { color: var(--text); font-weight: 500; }
+  footer a { color: var(--accent-dim); text-decoration: none; }
+
+  @media (max-width: 560px) {
+    header { padding: 32px 0 24px; }
+    h1 { font-size: 32px; }
+    a.btn { padding: 13px 18px; font-size: 12px; }
+  }
 </style>
 </head>
 <body>
-<main>
-  <div class="brand">
-    <img src="assistant-256.png" alt="">
-    <div>
-      <div class="tag">SEN / PRIVATE NODE</div>
-      <h1>森</h1>
-    </div>
+<div class="wrap">
+
+  <div class="topline">
+    <span><span class="dot"></span>LOCAL CORE / DISTRIBUTION</span>
+    <span>VERSION <b id="version">—</b></span>
   </div>
 
+  <header>
+    <img src="assistant-256.png" alt="">
+    <div>
+      <div class="kicker">SEN / PRIVATE NODE</div>
+      <h1>森</h1>
+    </div>
+  </header>
+
   <p class="lead">
-    在自己的电脑上运行的 AI 助手。对话、看图、画图、训练模型，全部本地完成，
-    内容不出这台机器。支持接入远程 API，也支持完全离线。
+    在自己的电脑上运行的 AI 助手。对话、看图、画图、训练模型全部本地完成，内容不出这台机器。
+    支持接入远程 API，也支持完全离线运行。
   </p>
 
   <div class="actions">
-    <a class="btn primary" id="download-setup"
-       href="https://github.com/178497/sen/releases/latest">下载安装包 <small id="setup-meta"></small></a>
-    <a class="btn" id="download-portable"
-       href="https://github.com/178497/sen/releases/latest">便携版 <small id="portable-meta"></small></a>
+    <a class="btn primary" id="download-setup" href="https://github.com/178497/sen/releases/latest">下载安装包 <small id="setup-meta"></small></a>
+    <a class="btn" id="download-portable" href="https://github.com/178497/sen/releases/latest">便携版 <small id="portable-meta"></small></a>
   </div>
+  <p class="hintline">安装包 = 开始菜单 + 卸载项 + 自动更新；便携版 = 解压即用。两者数据都保存在 <code>%LOCALAPPDATA%\Sen</code>。</p>
 
   <div class="grid">
     <div class="card">
-      <h2>需要先装 Ollama</h2>
-      <p>森 通过 Ollama 运行本地模型。安装后首次启动会引导你下载对话模型（约 1.4 GB）。</p>
+      <h2>01 · 前置条件</h2>
+      <p>需要先安装 Ollama（本地推理引擎）。首次启动会引导你下载对话模型，约 1.4 GB。</p>
     </div>
     <div class="card">
-      <h2>系统要求</h2>
-      <p>Windows 10/11 64 位，建议 16 GB 内存；有 NVIDIA 显卡会明显更快。</p>
+      <h2>02 · 系统要求</h2>
+      <p>Windows 10 / 11 64 位，建议 16 GB 内存。有 NVIDIA 显卡时推理明显更快，没有也能跑。</p>
     </div>
     <div class="card">
-      <h2>数据位置</h2>
-      <p>对话与资料保存在 <code>%LOCALAPPDATA%\Sen</code>，卸载时会询问是否保留。</p>
+      <h2>03 · 数据位置</h2>
+      <p>对话、资料、配置都在 <code>%LOCALAPPDATA%\Sen</code>，卸载时会询问是否保留。</p>
     </div>
   </div>
 
   <footer>
-    当前版本：<span id="version">—</span><br>
-    SHA-256：<code id="sha">—</code><br>
-    安装包未签名，首次运行 Windows 可能提示“未知发布者”，
-    点“更多信息 → 仍要运行”即可。
+    当前版本 <b id="version-foot">—</b> · SHA-256 <code id="sha">—</code><br>
+    安装包未签名，首次运行 Windows 可能提示"未知发布者"，点「更多信息 → 仍要运行」即可。<br>
+    <a href="https://github.com/178497/sen">源码与更新日志</a>
   </footer>
-</main>
+
+</div>
 
 <script>
   document.getElementById("setup-meta").textContent = "v0.1.4 · 14.1 MB";
+  document.getElementById("portable-meta").textContent = "v0.1.4 · 14.5 MB";
+  document.getElementById("version-foot").textContent = "0.1.4";
 
   fetch("latest.json", { cache: "no-store" })
     .then(response => response.ok ? response.json() : null)
     .then(data => {
       if (!data) return;
-      document.getElementById("version").textContent = data.version || "—";
+      const version = data.version || "—";
+      document.getElementById("version").textContent = version;
+      document.getElementById("version-foot").textContent = version;
       document.getElementById("sha").textContent = data.sha256 || "—";
       const setup = document.getElementById("download-setup");
       const portable = document.getElementById("download-portable");
@@ -126,9 +181,7 @@
       if (data.size_mb) document.getElementById("setup-meta").textContent = `${data.size_mb} MB`;
       if (data.portable_size_mb) document.getElementById("portable-meta").textContent = `${data.portable_size_mb} MB`;
     })
-    .catch(() => {
-      document.getElementById("version").textContent = "0.1.4";
-    });
+    .catch(() => {});
 </script>
 </body>
 </html>
