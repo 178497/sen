@@ -429,7 +429,18 @@ chmod +x ~/sen-install.command && ~/sen-install.command</code>
       setText($("mac-intro"),
         "安装包没有签名和公证，第一次打开需要按下面的步骤放行一次；之后正常双击即可。");
     } else {
-      setText($("mac-meta"), "一条命令安装");
+      /* 没有 .app 时，按钮直接下载安装脚本：点一下 → 双击运行 */
+      var scriptUrl = String(data.macos_command_url || "");
+      if (scriptUrl) {
+        mac.href = scriptUrl;
+        mac.setAttribute("download", "one-click-mac.command");
+        setText($("mac-meta"), "下载安装脚本");
+        setText($("mac-intro"),
+          "点按钮下载 one-click-mac.command（约 13 KB），在「下载」里双击运行即可。" +
+          "首次双击如果被系统拦下：右键 → 打开。整个构建在本机进行，约 3–8 分钟。");
+      } else {
+        setText($("mac-meta"), "一条命令安装");
+      }
     }
 
     var cmdUrl = String(data.macos_command_url || "");
