@@ -4,6 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>森 · 本地 AI 助手</title>
+<meta name="description" content="森：在自己电脑上运行的本地 AI 助手。对话、看图、画图、训练模型全部本地完成，内容不出这台机器；支持接入远程 API，也支持完全离线运行。">
+<meta name="theme-color" content="#060806">
+<link rel="canonical" href="https://178497.github.io/sen/">
+<link rel="icon" type="image/png" href="assistant-256.png">
+<link rel="apple-touch-icon" href="assistant-256.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="森">
+<meta property="og:title" content="森 · 本地 AI 助手">
+<meta property="og:description" content="对话、看图、画图、训练模型全部本地完成，内容不出这台机器。">
+<meta property="og:url" content="https://178497.github.io/sen/">
+<meta property="og:image" content="https://178497.github.io/sen/screenshot-main.jpg">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="森 · 本地 AI 助手">
+<meta name="twitter:description" content="本地运行的 AI 助手，数据不出这台机器。">
+<meta name="twitter:image" content="https://178497.github.io/sen/screenshot-main.jpg">
 <style>
   :root {
     color-scheme: dark;
@@ -255,18 +271,55 @@
       font: 12px/1.5 ui-monospace, Consolas, monospace;
       color: #d7e6c8;
     }
+  /* ---- 追加：命令块 / 错误态 / 窄屏 ---- */
+  .topline { flex-wrap: wrap; gap: 4px 16px; }
+  .cmd {
+    display: flex; align-items: flex-start; gap: 10px; flex-wrap: wrap;
+    margin: 12px 0 8px; padding: 12px 14px;
+    border: 1px solid rgba(255,255,255,.10); background: rgba(0,0,0,.45);
+  }
+  .cmd code {
+    flex: 1 1 300px; min-width: 0;
+    font: 12px/1.7 var(--mono); color: #d7e6c8;
+    white-space: pre-wrap; word-break: break-all;
+  }
+  .copy {
+    flex: 0 0 auto; cursor: pointer;
+    font: 600 10px/1 var(--mono); letter-spacing: .08em;
+    padding: 8px 12px;
+    color: var(--accent); background: transparent;
+    border: 1px solid var(--accent-dim);
+  }
+  .copy:hover { background: rgba(216, 244, 90, .12); }
+  .copy[data-done="1"] { color: var(--text); border-color: var(--text); }
+  .hashline {
+    margin: 0 0 6px; font: 11px/1.7 var(--mono); color: var(--muted);
+    word-break: break-all;
+  }
+  .error { color: #ff9c9c; font-size: 13px; }
+  .error a { color: #ff9c9c; }
+  footer code { word-break: break-all; }
+  @media (max-width: 520px) {
+    .topline .src { display: none; }
+    .topline { justify-content: flex-end; }
+  }
   </style>
 </head>
 <body>
 <div class="wrap">
 
   <div class="topline">
-    <span><span class="dot"></span>LOCAL CORE / DISTRIBUTION</span>
+    <span class="src"><span class="dot"></span>LOCAL CORE / DISTRIBUTION</span>
     <span>VERSION <b id="version">—</b></span>
   </div>
 
+  <noscript>
+    <p class="muted" style="margin-top:14px">版本号和更新日志需要 JavaScript。最新版可以直接看
+      <a href="https://github.com/178497/sen/releases/latest">GitHub Releases</a>。</p>
+  </noscript>
+
   <header>
-    <img src="assistant-256.png" alt="">
+    <img src="assistant-256.png" alt="" width="64" height="64">
     <div>
       <div class="kicker">SEN / PRIVATE NODE</div>
       <h1>森</h1>
@@ -282,30 +335,37 @@
     <a class="btn primary" id="download-setup" href="https://github.com/178497/sen/releases/latest">Windows 安装包 <small id="setup-meta"></small></a>
     <a class="btn" id="download-portable" href="https://github.com/178497/sen/releases/latest">便携版 <small id="portable-meta"></small></a>
     <a class="btn" id="download-mac" href="#mac-note">macOS 版 <small id="mac-meta">内测</small></a>
-    <a class="btn demo" href="https://178497.github.io/sen/demo/?demo=1" target="_blank" rel="noopener">在线体验 ↗</a>
+    <a class="btn demo" href="demo/?demo=1" target="_blank" rel="noopener">在线体验 ↗</a>
   </div>
-  <p class="hintline">安装包 = 开始菜单 + 卸载项 + 自动更新；便携版 = 解压即用。Windows 数据在 <code>%LOCALAPPDATA%\Sen</code>。</p>
+  <p class="hintline">Windows：安装包 = 开始菜单 + 卸载项 + 自动更新；便携版 = 解压即用；数据在 <code>%LOCALAPPDATA%\Sen</code>。</p>
+  <p class="hintline error" id="load-error" hidden>版本信息读取失败，按钮仍指向最新 Release。</p>
 
   <div class="mac-note" id="mac-note">
-    <b>macOS 版说明</b>
-    <p>支持 Apple Silicon（M1 及以上），系统要求 macOS 11+。安装包没有签名和公证，第一次打开需要：右键点 Sen.app → 打开，或在终端执行：</p>
-    <code>xattr -dr com.apple.quarantine /Applications/Sen.app</code>
-    <p>macOS 上的训练走 fp16 LoRA（不使用 4-bit 量化），速度比 NVIDIA 显卡慢，但功能一致。数据保存在 <code>~/Library/Application Support/Sen</code>。</p>
-    <p id="mac-status"><b>当前状态</b>：macOS 安装包由本机构建产出，上传到 Release 后这里会自动变成下载链接。</p>
+    <b>macOS 版 · Apple Silicon / macOS 11+</b>
+    <p id="mac-intro">目前是内测：没有签名和公证，用一条命令在本机构建并安装（3–8 分钟，会装 uv、独立 Python 3.12 和依赖），产物直接进「应用程序」。</p>
+    <div class="cmd" id="mac-cmd-box">
+      <code id="mac-cmd">curl -fL --max-time 30 --retry 2 -o ~/sen-install.command https://178497.github.io/sen/one-click-mac.command
+chmod +x ~/sen-install.command && ~/sen-install.command</code>
+      <button class="copy" id="copy-cmd" type="button">复制</button>
+    </div>
+    <p class="hashline" id="mac-sha-line" hidden>安装脚本 SHA-256：<code id="mac-sha"></code></p>
+    <p id="mac-status"><b>当前状态</b>：安装包还没上 Release，上面的命令是唯一入口；有了安装包这里会换成下载链接。</p>
+    <p>首次打开被系统拦下时：macOS 14 及更早可以右键 Sen.app → 打开；<b>macOS 15 起右键不再有效</b>，去「系统设置 → 隐私与安全性 → 仍要打开」。</p>
+    <p>训练走 fp16 LoRA（不用 4-bit 量化），比 NVIDIA 显卡慢，但功能一致。数据在 <code>~/Library/Application Support/Sen</code>。</p>
   </div>
 
   <div class="grid">
     <div class="card">
       <h2>01 · 前置条件</h2>
-      <p>需要先安装 Ollama（本地推理引擎）。首次启动会引导你下载对话模型，约 1.4 GB。</p>
+      <p>需要先安装 Ollama（本地推理引擎，Windows 与 macOS 相同）。首次启动会引导你下载对话模型，约 1.4 GB。</p>
     </div>
     <div class="card">
       <h2>02 · 系统要求</h2>
-      <p>Windows 10 / 11 64 位，建议 16 GB 内存。有 NVIDIA 显卡时推理明显更快，没有也能跑。</p>
+      <p>Windows 10 / 11 64 位，或 macOS 11+（Apple Silicon）；建议 16 GB 内存。有 NVIDIA 显卡时推理明显更快，没有也能跑。</p>
     </div>
     <div class="card">
       <h2>03 · 数据位置</h2>
-      <p>对话、资料、配置都在 <code>%LOCALAPPDATA%\Sen</code>，卸载时会询问是否保留。</p>
+      <p>对话、资料、配置都在 <code>%LOCALAPPDATA%\Sen</code>（macOS 是 <code>~/Library/Application Support/Sen</code>），卸载时会询问是否保留。</p>
     </div>
   </div>
 
@@ -316,108 +376,151 @@
 
   <footer>
     当前版本 <b id="version-foot">—</b> · SHA-256 <code id="sha">—</code><br>
-    安装包未签名，首次运行 Windows 可能提示"未知发布者"，点「更多信息 → 仍要运行」即可。<br>
+    安装包未签名，首次运行 Windows 可能提示「未知发布者」，点「更多信息 → 仍要运行」即可。<br>
     <a href="https://github.com/178497/sen">源码与更新日志</a>
   </footer>
 
 </div>
 
 <script>
-  document.getElementById("setup-meta").textContent = "v0.1.13 · 15.3 MB";
-  document.getElementById("portable-meta").textContent = "v0.1.13 · 15.8 MB";
-  document.getElementById("version-foot").textContent = "0.1.13";
+(function () {
+  "use strict";
 
+  var $ = function (id) { return document.getElementById(id); };
+  function setText(el, text) { if (el) el.textContent = text; }
+  function fmt(v, sizeMb) {
+    if (!v) return "";
+    return sizeMb ? "v" + v + " · " + sizeMb + " MB" : "v" + v;
+  }
+  function getJSON(url, ms) {
+    var opts = { cache: "no-store" };
+    if (typeof AbortSignal !== "undefined" && AbortSignal.timeout) {
+      opts.signal = AbortSignal.timeout(ms || 8000);
+    }
+    return fetch(url, opts).then(function (response) {
+      if (!response.ok) throw new Error("HTTP " + response.status);
+      return response.json();
+    });
+  }
 
-  fetch("changelog.json", { cache: "no-store" })
-    .then(response => response.ok ? response.json() : null)
-    .then(list => {
-      if (!Array.isArray(list) || !list.length) return;
-      const box = document.getElementById("changelog-list");
-      box.innerHTML = "";
-      const render = (entry, dim) => {
-        const item = document.createElement("article");
-        item.className = "changelog-item" + (dim ? " era" : "");
-        const head = document.createElement("h3");
-        head.textContent = entry.title || ("v" + entry.version);
-        const date = document.createElement("span");
-        date.textContent = entry.date || "";
-        head.appendChild(date);
-        item.appendChild(head);
-        const ul = document.createElement("ul");
-        (entry.highlights || []).forEach(line => {
-          const li = document.createElement("li");
-          li.textContent = line;
-          ul.appendChild(li);
-        });
-        item.appendChild(ul);
-        return item;
-      };
-      const visible = list.slice(0, 8).map(item => [item, false]);
-      const rest = list.slice(8).map(item => [item, false]);
-      visible.forEach(([entry]) => box.appendChild(render(entry)));
-      const more = document.createElement("button");
+  /* ---------------- 版本与下载 ---------------- */
+  getJSON("latest.json", 8000).then(function (data) {
+    var version = String(data.version || "");
+    var v = version ? "v" + version : "—";
+
+    setText($("version"), v);
+    setText($("version-foot"), version || "—");
+    setText($("sha"), data.sha256 || "—");
+    setText($("setup-meta"), fmt(version, data.size_mb));
+    setText($("portable-meta"), fmt(version, data.portable_size_mb));
+
+    if (data.url) $("download-setup").href = data.url;
+    if (data.portable_url) $("download-portable").href = data.portable_url;
+
+    /* macOS：有安装包就变下载按钮，没有就保持一条命令安装 */
+    var macUrl = String(data.macos_url || "");
+    var mac = $("download-mac");
+    if (macUrl) {
+      mac.href = macUrl;
+      setText($("mac-meta"), fmt(version, data.macos_size_mb));
+      if ($("mac-status")) $("mac-status").hidden = true;
+      if ($("mac-cmd-box")) $("mac-cmd-box").hidden = true;
+      if ($("mac-sha-line")) $("mac-sha-line").hidden = true;
+      setText($("mac-intro"),
+        "安装包没有签名和公证，第一次打开需要按下面的步骤放行一次；之后正常双击即可。");
+    } else {
+      setText($("mac-meta"), "一条命令安装");
+    }
+
+    var cmdUrl = String(data.macos_command_url || "");
+    if (cmdUrl) {
+      setText($("mac-cmd"),
+        "curl -fL --max-time 30 --retry 2 -o ~/sen-install.command " + cmdUrl + "\n" +
+        "chmod +x ~/sen-install.command && ~/sen-install.command");
+    }
+    if (data.macos_command_sha256) {
+      setText($("mac-sha"), data.macos_command_sha256);
+      if ($("mac-sha-line")) $("mac-sha-line").hidden = false;
+    }
+  }).catch(function () {
+    setText($("version"), "—");
+    if ($("load-error")) $("load-error").hidden = false;
+  });
+
+  /* ---------------- 更新日志 ---------------- */
+  getJSON("changelog.json", 10000).then(function (list) {
+    var box = $("changelog-list");
+    if (!Array.isArray(list) || !list.length) {
+      box.innerHTML = '<p class="muted">暂无更新日志。</p>';
+      return;
+    }
+    function render(entry, dim) {
+      var item = document.createElement("article");
+      item.className = "changelog-item" + (dim ? " era" : "");
+      var head = document.createElement("h3");
+      head.textContent = entry.title || ("v" + entry.version);
+      var date = document.createElement("span");
+      date.textContent = entry.date || "";
+      head.appendChild(date);
+      item.appendChild(head);
+      var ul = document.createElement("ul");
+      (entry.highlights || []).forEach(function (line) {
+        var li = document.createElement("li");
+        li.textContent = line;
+        ul.appendChild(li);
+      });
+      item.appendChild(ul);
+      return item;
+    }
+    var visible = list.slice(0, 8);
+    var rest = list.slice(8);
+    box.innerHTML = "";
+    visible.forEach(function (entry) { box.appendChild(render(entry, false)); });
+    if (rest.length) {
+      var more = document.createElement("button");
       more.type = "button";
       more.className = "changelog-more";
-      more.textContent = `查看更早的 ${rest.length} 条 ↓`;
-      box.appendChild(more);
-      let expanded = false;
-      more.addEventListener("click", () => {
-        if (expanded) return;
-        expanded = true;
+      more.textContent = "查看更早的 " + rest.length + " 条 ↓";
+      more.addEventListener("click", function () {
         more.remove();
-        rest.forEach(([entry]) => box.appendChild(render(entry)));
+        rest.forEach(function (entry) { box.appendChild(render(entry, true)); });
       });
-      if (false) list.slice(0, 8).forEach(entry => {
-        const item = document.createElement("article");
-        item.className = "changelog-item";
-        const head = document.createElement("h3");
-        head.textContent = "v" + entry.version;
-        const date = document.createElement("span");
-        date.textContent = entry.date || "";
-        head.appendChild(date);
-        item.appendChild(head);
-        const ul = document.createElement("ul");
-        (entry.highlights || []).forEach(line => {
-          const li = document.createElement("li");
-          li.textContent = line;
-          ul.appendChild(li);
-        });
-        item.appendChild(ul);
-        box.appendChild(item);
-      });
-    })
-    .catch(() => {});
+      box.appendChild(more);
+    }
+  }).catch(function () {
+    $("changelog-list").innerHTML =
+      '<p class="error">更新日志读取失败 · <a href="https://github.com/178497/sen/commits/main">在 GitHub 查看</a></p>';
+  });
 
-  fetch("latest.json", { cache: "no-store" })
-    .then(response => response.ok ? response.json() : null)
-    .then(data => {
-      if (!data) return;
-      const version = data.version || "—";
-      document.getElementById("version").textContent = version;
-      document.getElementById("version-foot").textContent = version;
-      document.getElementById("sha").textContent = data.sha256 || "—";
-      const setup = document.getElementById("download-setup");
-      const portable = document.getElementById("download-portable");
-      if (data.url) setup.href = data.url;
-      if (data.portable_url) portable.href = data.portable_url;
-      if (data.size_mb) document.getElementById("setup-meta").textContent = `${data.size_mb} MB`;
-      if (data.portable_size_mb) document.getElementById("portable-meta").textContent = `${data.portable_size_mb} MB`;
-
-      const mac = document.getElementById("download-mac");
-      const macMeta = document.getElementById("mac-meta");
-      const macNote = document.getElementById("mac-note");
-      const macStatus = document.getElementById("mac-status");
-      if (data.macos_url) {
-        mac.href = data.macos_url;
-        if (macMeta) macMeta.textContent = data.macos_size_mb ? `${data.macos_size_mb} MB` : "";
-        if (macStatus) macStatus.hidden = true;
-      } else {
-        if (macStatus) macStatus.hidden = false;
-        if (macMeta) macMeta.textContent = "内测";
-        if (macNote) macNote.hidden = false;
+  /* ---------------- 复制安装命令 ---------------- */
+  var copy = $("copy-cmd");
+  if (copy) {
+    copy.addEventListener("click", function () {
+      var text = $("mac-cmd").textContent;
+      function done() {
+        copy.textContent = "已复制";
+        copy.setAttribute("data-done", "1");
+        window.setTimeout(function () {
+          copy.textContent = "复制";
+          copy.removeAttribute("data-done");
+        }, 1800);
       }
-    })
-    .catch(() => {});
+      function selectOnly() {
+        var range = document.createRange();
+        range.selectNodeContents($("mac-cmd"));
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        copy.textContent = "已选中";
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, selectOnly);
+      } else {
+        selectOnly();
+      }
+    });
+  }
+})();
 </script>
 </body>
 </html>
