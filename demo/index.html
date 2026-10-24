@@ -3,7 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>森</title>
+  <meta name="description" content="森 · 在线体验：本地 AI 助手的界面预览，可以切换主题、看动效；真正的对话需要下载安装。">
+  <meta name="robots" content="noindex">
+  <meta property="og:title" content="森 · 在线体验">
+  <meta property="og:description" content="本地 AI 助手的界面预览，可以切换主题、看动效。">
+  <meta property="og:image" content="https://178497.github.io/sen/screenshot-main.jpg">
+  <title>森 · 在线体验</title>
   <style>
     :root {
       color-scheme: dark;
@@ -4552,7 +4557,11 @@
     /* 演示模式：?demo=1 时用假 API 跑起来，不连本机后端 */
     (function () {
       var params = new URLSearchParams(location.search);
-      if (params.get("demo") !== "1" || window.pywebview) return;
+      // ?demo=1 强制预览；直接打开托管在 Pages 上的 /demo/ 也进预览。
+      // 桌面端从 127.0.0.1 / file:// 加载，hostname 不会命中，且桥接存在时一律走真实后端。
+      var forced = params.get("demo") === "1";
+      var hosted = location.hostname === "178497.github.io";
+      if (!forced && !(hosted && !window.pywebview)) return;
       window.SEN_DEMO = true;
       var LF = String.fromCharCode(10);
       var now = Date.now();
