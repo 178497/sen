@@ -1,20 +1,25 @@
 {
-  "version": "0.1.17",
+  "version": "0.1.39",
   "channel": "beta",
-  "url": "https://github.com/178497/sen/releases/download/v0.1.17/Sen-Setup-0.1.17.exe",
-  "sha256": "c24bd303d9bfede7cdee41b92f6e1bb066f7f7209a5a7bd415bf908227568336",
+  "url": "https://github.com/178497/sen/releases/download/v0.1.39/Sen-Setup-0.1.39.exe",
+  "sha256": "69c2b903a23ce9014198b3cff12a48f4acfe6361fa20b23b0f619582ea4c0204",
   "size_mb": 15.3,
-  "url_zip": "https://cdn.jsdelivr.net/gh/178497/sen@main/Sen-Setup-0.1.17.zip",
-  "url_zip_pages": "https://178497.github.io/sen/Sen-Setup-0.1.17.zip",
-  "zip_sha256": "2ae189ad2f670ab545791327f01b1e0e5d9bb2b08ce83bfa7f8cc07c528db3a8",
-  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.17/Sen-0.1.17-portable.zip",
-  "portable_sha256": "8ffe23974ae1977e10f8142d754bc634e79235a094007f68c4804afc814c11c1",
-  "portable_size_mb": 15.8,
+  "portable_url": "https://github.com/178497/sen/releases/download/v0.1.39/Sen-0.1.39-portable.zip",
+  "portable_sha256": "c6a523dbb8f95cbb0905226d82cbd0e1c7645a57ae29766343634b89075eab87",
+  "portable_size_mb": 15.9,
   "min_version": "0.1.0",
-  "notes": "首次打开有 5 步新手引导；引导随时可在设置 → 关于里重新观看",
+  "notes": "更新检查支持备用源，网络抖动时也能发现新版本；macOS 版增加一条命令安装入口",
+  "macos_url": "",
+  "macos_size_mb": 0,
+  "macos_sha256": "",
+  "macos_command_url": "https://178497.github.io/sen/one-click-mac.command",
+  "macos_command_sha256": "c2f31f2af9351f7550ddcd1c0d119e2fb7cc126c37c74933ae7f7b78535823d2",
+  "url_zip": "https://cdn.jsdelivr.net/gh/178497/sen@main/Sen-Setup-0.1.39.zip",
+  "url_zip_pages": "https://178497.github.io/sen/Sen-Setup-0.1.39.zip",
+  "zip_sha256": "ccdf042f88b4593e2e0a03614bbc8a93652d367a6e75e4e29ff2b6941072bcea",
+  "update_url": "https://cdn.jsdelivr.net/gh/178497/sen@main/latest.json",
   "highlights": [
-    "首次打开有 5 步新手引导",
-    "引导随时可在设置 → 关于里重新观看"
-  ],
-  "update_url": "https://178497.github.io/sen/latest.json"
+    "更新检查支持备用源，网络抖动时也能发现新版本",
+    "macOS 版增加一条命令安装入口"
+  ]
 }
