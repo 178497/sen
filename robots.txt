@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /demo/
+
+Sitemap: https://178497.github.io/sen/sitemap.xml
